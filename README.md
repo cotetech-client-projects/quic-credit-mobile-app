@@ -41,3 +41,28 @@ Build for ios
  ```
  flutter clean
  ```
+# Flutter project structure
+
+project_name/
+|-- android/
+|-- ios/
+|-- lib/
+|   |-- main.dart
+|   |-- screens/
+|   |   |-- splash_screen.dart
+|   |   |-- onboarding_screen.dart
+|   |   |-- signup_page.dart
+|   |   |-- login_page.dart
+|   |   |-- verification_page.dart
+|   |   |-- password_reset.dart
+|   |   |-- home_page.dart
+|   |   |-- loan_activity.dart
+|   |   |-- user_profile.dart
+|   |   |-- loan_offers.dart
+|   |-- models/
+|   |-- services/
+|   |-- utils/
+|   |-- widgets/
+|-- test/
+|-- pubspec.yaml
+|-- README.md
