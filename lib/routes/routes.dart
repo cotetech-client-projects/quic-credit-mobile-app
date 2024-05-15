@@ -11,14 +11,13 @@ class Routes {
   static String settings = "/settings";
   static String notifications = "/notifications";
 
- 
   // routes merger
   static Map<String, Widget Function(BuildContext context)> routes = {
-    onboard: (context) =>  OnboardingScreen(),
-    splash: (context) =>  SplashScreen(),
+    onboard: (context) => OnboardingScreen(),
+    splash: (context) => SplashScreen(),
     // createAccount: (context) => const CreateAccount(),
     // completeProfile: (context) => const CompleteUserProfile(),
-    // login: (context) => const LoginScreen(),
+    login: (context) => LoginScreen(),
     // home: (context) => const HomeScreen(),
     // settings: (context) => const GeneralSettings(),
   };

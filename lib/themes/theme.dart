@@ -5,9 +5,8 @@ class Themes {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     // backgroundColor: Colors.white,
   );
-  static Color primaryColor = const Color.fromARGB(1,98,159,255);
-  static TextTheme textTheme =
-      const TextTheme(); //GoogleFonts.poppinsTextTheme();
+  static Color primaryColor = const Color.fromARGB(1, 98, 159, 255);
+  static TextTheme textTheme = GoogleFonts.nunitoTextTheme();
 // light theme
   static ThemeData lightTheme = ThemeData(
     drawerTheme: drawerTheme,

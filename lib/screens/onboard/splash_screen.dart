@@ -16,9 +16,9 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 2),
     );
-    _animation = Tween<double>(begin: 1.0, end: 1.1).animate(
+    _animation = Tween<double>(begin: 2.5, end: 3).animate(
       CurvedAnimation(
         parent: _animationController,
         curve: Curves.easeInOut,
@@ -39,12 +39,27 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue, // Set your desired background color
-      body: Center(
-        child: ScaleTransition(
-          scale: _animation,
-          child: FlutterLogo(size: 150), // Replace with your logo or image
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          ScaleTransition(
+            scale: _animation,
+            child: Image.asset(
+              "assets/pngs/icon.png",
+              width: 200,
+              height: 200,
+              fit: BoxFit.cover,
+            ),
+          ),
+           Space(space:0.22),
+          SpinKitDualRing(
+            size: 35.0,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        Space(space:0.1),
+        Text("Powered by COTE Limited",style:Theme.of(context).textTheme.bodyLarge!.apply(fontWeightDelta:3,),),
+         Space(space:0.052),
+        ],
       ),
     );
   }
