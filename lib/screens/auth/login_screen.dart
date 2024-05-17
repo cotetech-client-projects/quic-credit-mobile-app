@@ -1,80 +1,108 @@
+import 'package:flutter/gestures.dart';
+
 import '/exports/exports.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            right: 0,
-            child: Transform.translate(
-              offset: const Offset(-50, -180),
-              child: Transform.rotate(
-                angle: ((30 * 3.14) / 180),
-                child: Container(
-                    width: 450,
-                    height: 550,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(50),
-                        bottomRight: Radius.circular(200),
-                      ),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage("assets/imgs/interest.jpg"),
+      body: AuthBody(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Consumer(
+            builder: (context, controller, c) {
+              return Form(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 0, 10, 10),
+                      child: Text(
+                        'Login',
+                        style: Theme.of(context).textTheme.headlineLarge!.apply(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeightDelta: 4,
+                              fontSizeDelta: 10,
+                            ),
                       ),
                     ),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.black26,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(50),
-                          bottomRight: Radius.circular(200),
+                    const Space(space: 0.041),
+                    // field for email
+                    CustomForm(
+                      controller: phoneController,
+                      labelText: "Phone number",
+                      keyboardType: TextInputType.phone,
+                      errorText: "Phone number is required",
+                      hintText: "07xxx-xxxx-xxx",
+                    ),
+                    const Space(space: 0.030),
+                    // field for password
+                    CustomForm(
+                      controller: passwordController,
+                      labelText: "Password",
+                      errorText: "Password is required",
+                      hintText: "***********",
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Forgot Password?",
+                            style: Theme.of(context).textTheme.bodyLarge!.apply(
+                                  fontWeightDelta: 3,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                          ),
                         ),
-                      ),
-                    )),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Space(space: 0.3),
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                        color: Colors.black38,
+                      ],
+                    ),
+                    CustomButton(
+                      onPress: () {},
+                      buttonColor: Theme.of(context).colorScheme.primary,
+                      text: "Login",
+                      buttonRadius: 10,
+                      textColor: Colors.white,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text: "\n\tDon't have an account? ",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        children: [
+                          TextSpan(
+                            text: "Sign Up",
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Routes.pushPage(
+                                    Routes.createAccount,
+                                  ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                SizedBox(height: 20),
-                TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 20),
-              ],
-            ),
+              );
+            },
           ),
-          Positioned(
-            top: 50,
-            left: 100,
-            child: Image.asset(
-              "assets/pngs/logo.png",
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

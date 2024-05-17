@@ -14,6 +14,7 @@ class CommonTextField extends StatelessWidget {
   final EdgeInsets? contentPadding;
   final bool enableSuffix;
   final IconData? suffixIcon;
+  final double? radius;
   final bool readOnly;
   final bool enableBorder;
   final VoidCallback? onTapSuffix;
@@ -21,6 +22,7 @@ class CommonTextField extends StatelessWidget {
   const CommonTextField({
     Key? key,
     this.hintText = '',
+    this.radius,
     this.isObscureText = false,
     this.padding = const EdgeInsets.only(),
     this.onChanged,
@@ -58,9 +60,9 @@ class CommonTextField extends StatelessWidget {
             ),
           Card(
             elevation: 0,
-            color: fieldColor,
+            color: fieldColor ?? Colors.grey.shade100,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(radius ?? 24),
               side: enableBorder
                   ? BorderSide(
                       color: Theme.of(context).brightness == Brightness.dark
@@ -78,7 +80,7 @@ class CommonTextField extends StatelessWidget {
                 right: 16,
               ),
               child: SizedBox(
-                height: 45,
+                height: 50,
                 child: Center(
                   child: TextFormField(
                     controller: controller,
@@ -87,7 +89,7 @@ class CommonTextField extends StatelessWidget {
                     onChanged: onChanged,
                     style: TextStyles(context).getRegularStyle(),
                     obscureText: isObscureText,
-                    cursorColor: Theme.of(context).primaryColor,
+                    cursorColor: Theme.of(context).colorScheme.primary,
                     onEditingComplete: () => FocusScope.of(context).nextFocus(),
                     validator: validate,
                     decoration: InputDecoration(
@@ -111,10 +113,13 @@ class CommonTextField extends StatelessWidget {
                               ),
                             )
                           : null,
-                      prefixIcon: Icon(icon,
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white60
-                              : Colors.black26),
+                      prefixIcon: icon == null
+                          ? null
+                          : Icon(icon,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white60
+                                  : Colors.black26),
                       errorText: null,
                       border: InputBorder.none,
                       hintText: hintText,
@@ -136,7 +141,7 @@ class CommonTextField extends StatelessWidget {
                 errorText ?? "",
                 style: TextStyles(context)
                     .getDescriptionStyle()
-                    .copyWith(color: Colors.black, fontSize: 13),
+                    .copyWith(color: Colors.red, fontSize: 13),
               ),
             )
         ],

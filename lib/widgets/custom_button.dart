@@ -30,16 +30,18 @@ class CustomButton extends StatelessWidget {
         width: width ?? MediaQuery.of(context).size.width,
         height: buttonHeight,
         decoration: BoxDecoration(
-          color: buttonColor ?? Theme.of(context).primaryColor.withOpacity(opacity),
+          color: buttonColor ??
+              Theme.of(context).primaryColor.withOpacity(opacity),
           borderRadius: BorderRadius.circular(buttonRadius),
         ),
         child: Center(
           child: Text(
             text,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .apply(color: textColor ?? Theme.of(context).primaryColor,),
+            style: Theme.of(context).textTheme.bodyLarge!.apply(
+                  fontWeightDelta: 4,
+                  fontSizeDelta: 2,
+                  color: textColor ?? Theme.of(context).colorScheme.primary,
+                ),
             textAlign: TextAlign.center,
           ),
         ),

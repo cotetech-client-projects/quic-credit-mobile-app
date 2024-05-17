@@ -5,20 +5,29 @@ class Routes {
   static String splash = "/splash";
   static String onboard = "/onBoard";
   static String createAccount = "/createAccount";
+  static String newPass = "/new-password";
   static String completeProfile = "/completeProfile";
+  static String otp = "/verifyPhone";
   static String login = "/login";
   static String home = "/home";
   static String settings = "/settings";
   static String notifications = "/notifications";
-
+  static String indexAuth = "/indexAuth";
+  static String work = "/work-info";
+  static String familyInfo = "/family-info";
   // routes merger
   static Map<String, Widget Function(BuildContext context)> routes = {
     onboard: (context) => OnboardingScreen(),
     splash: (context) => SplashScreen(),
-    // createAccount: (context) => const CreateAccount(),
-    // completeProfile: (context) => const CompleteUserProfile(),
-    login: (context) => LoginScreen(),
-    // home: (context) => const HomeScreen(),
+    indexAuth: (context) => const IndexAuthPage(),
+    createAccount: (context) => const SignUp(),
+    newPass: (context) => const SetPassword(),
+    completeProfile: (context) => const UserProfile(),
+    login: (context) => const LoginScreen(),
+    otp: (context) => const PhoneVerification(),
+    work: (context) => const WorkInfo(),
+    familyInfo: (context) => const FamilyInfo(),
+    home: (context) => const IndexHome(),
     // settings: (context) => const GeneralSettings(),
   };
   // routes methods

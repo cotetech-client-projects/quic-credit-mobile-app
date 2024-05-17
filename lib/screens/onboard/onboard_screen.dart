@@ -34,10 +34,10 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-     statusBarIconBrightness:Brightness.dark,
-    ),
-  );
+      const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: PageView.builder(
@@ -72,7 +72,7 @@ class OnboardingScreen extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 if (pageController.page == pages.length - 1) {
-                  Routes.pushReplace(Routes.login);
+                  Routes.pushReplace(Routes.indexAuth);
                 } else {
                   pageController.nextPage(
                     duration: const Duration(milliseconds: 500),
