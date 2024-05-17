@@ -40,6 +40,7 @@ export "/screens/auth/user_profile.dart";
 export "/screens/auth/phone_verification.dart";
 export "/screens/auth/work_info.dart";
 export "/screens/auth/family_info.dart";
+export "/screens/auth/forgot_password.dart";
 // home screens
 export "/screens/home/index_home.dart";
 

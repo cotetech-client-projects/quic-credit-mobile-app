@@ -15,6 +15,7 @@ class Routes {
   static String indexAuth = "/indexAuth";
   static String work = "/work-info";
   static String familyInfo = "/family-info";
+  static String forgoPassword = "/forgot-password";
   // routes merger
   static Map<String, Widget Function(BuildContext context)> routes = {
     onboard: (context) => OnboardingScreen(),
@@ -23,6 +24,7 @@ class Routes {
     createAccount: (context) => const SignUp(),
     newPass: (context) => const SetPassword(),
     completeProfile: (context) => const UserProfile(),
+    forgoPassword: (context) => const ForgotPassword(),
     login: (context) => const LoginScreen(),
     otp: (context) => const PhoneVerification(),
     work: (context) => const WorkInfo(),
