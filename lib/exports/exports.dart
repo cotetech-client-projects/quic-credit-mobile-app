@@ -31,6 +31,7 @@ export "/widgets/custom_button.dart";
 export "/widgets/common_text_field.dart";
 export "/widgets/text_styles.dart";
 export "/widgets/custom_form.dart";
+export '/widgets/bottom_up_animation.dart';
 export '/screens/auth/widgets/body.dart';
 // screens
 export "/screens/onboard/onboard_screen.dart";
