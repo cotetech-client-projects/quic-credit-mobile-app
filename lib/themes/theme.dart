@@ -17,7 +17,7 @@ class Themes {
     ),
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryColor,
-      brightness: Brightness.light,
+      // brightness: Brightness.light,
       background: Colors.white,
     ),
     primaryColor: primaryColor,

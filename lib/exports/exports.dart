@@ -6,12 +6,16 @@ export 'package:flutter_spinkit/flutter_spinkit.dart';
 export 'package:smooth_page_indicator/smooth_page_indicator.dart';
 export 'package:pinput/pinput.dart';
 export 'package:flutter_svg/flutter_svg.dart';
+export 'package:google_nav_bar/google_nav_bar.dart';
+export 'package:auto_size_text/auto_size_text.dart';
+export "package:shared_preferences/shared_preferences.dart";
 
 // routes
 export "/routes/routes.dart";
 
-// controllers
-// export "";
+// apis
+export '/apis/apis.dart';
+
 // themes
 export "/themes/theme.dart";
 export "/main.dart";
@@ -46,3 +50,10 @@ export "/screens/home/index_home.dart";
 
 // tools
 export '/tools/tools.dart';
+
+// services
+export '/services/storage_services.dart';
+export '/services/session_service.dart';
+
+// controllers
+export "package:quic_credit/controllers/theme_controller.dart";

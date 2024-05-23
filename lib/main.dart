@@ -17,15 +17,27 @@ void main() {
 // styling to the top and bottom navigation bars in full screen mode.
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.black12,
+      statusBarColor: Colors.black38,
+      systemNavigationBarColor: Colors.black45,
     ),
   );
   runApp(
-    MaterialApp(
-      navigatorKey: navigatorKey,
-      theme: Themes.lightTheme,
-      initialRoute:Routes.splash,
-      routes:Routes.routes,
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ThemeController(),
+        ),
+      ],
+      child: Consumer<ThemeController>(builder: (context, controller, co) {
+        return MaterialApp(
+          navigatorKey: navigatorKey,
+          themeMode: controller.themeMode,
+          theme: Themes.lightTheme,
+          darkTheme: Themes.darkTheme,
+          initialRoute: Routes.splash,
+          routes: Routes.routes,
+        );
+      }),
     ),
   );
 }

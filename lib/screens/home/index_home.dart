@@ -1,3 +1,7 @@
+import 'package:quic_credit/screens/home/activity/index_activity.dart';
+import 'package:quic_credit/screens/home/home_pages/index.dart';
+import 'package:quic_credit/screens/home/profile/profile.dart';
+
 import '/exports/exports.dart';
 
 class IndexHome extends StatefulWidget {
@@ -8,14 +12,91 @@ class IndexHome extends StatefulWidget {
 }
 
 class _IndexHomeState extends State<IndexHome> {
+  final pageController = PageController(initialPage: 1);
+  List<Widget> pages = [
+    const IndexActivity(),
+    const HomePage(),
+    const ProfilePage()
+  ];
+  int initiatePage = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: PageView.builder(
-          itemBuilder: (context, index) {
-            return Text("Home");
-          },
+      body: PageView.builder(
+        controller: pageController,
+        itemCount: pages.length,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          return pages[index];
+        },
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Theme.of(context).brightness == Brightness.light
+              ? Colors.grey.shade100
+              : Colors.black,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.grey.shade200
+                  : Colors.white38,
+            )
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+          child: GNav(
+            gap: 10,
+            // activeColor: const Color.fromARGB(255, 0, 0, 0),
+            iconSize: 30,
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
+            duration: const Duration(milliseconds: 100),
+            tabBackgroundColor: Theme.of(context).brightness == Brightness.light
+                ? Theme.of(context).primaryColor.withAlpha(30)
+                : Colors.white24,
+            color: Colors.grey.shade400,
+            textStyle: Theme.of(context).textTheme.bodyMedium!.apply(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeightDelta: 5,
+                ),
+            tabActiveBorder: Border.all(
+              color: Theme.of(context).primaryColorDark.withAlpha(20),
+              width: 1,
+            ), // tab button border
+            // tabBorder: Border.all(
+            //   color: Colors.grey,
+            //   width: 0.3,
+            // ), // t/ tab button shadow
+            curve: Curves.easeOutExpo, // tab animation curves
+            tabs: [
+              GButton(
+                icon: Icons.timelapse,
+                text: 'Transactions',
+                iconActiveColor: Theme.of(context).colorScheme.primary,
+              ),
+              GButton(
+                icon: Icons.home_outlined,
+                text: 'Home',
+                iconActiveColor: Theme.of(context).colorScheme.primary,
+              ),
+              GButton(
+                icon: Icons.person_outline,
+                text: 'Profile',
+                iconActiveColor: Theme.of(context).colorScheme.primary,
+              ),
+            ],
+            selectedIndex: initiatePage,
+            onTabChange: (index) {
+              setState(() {
+                initiatePage = index;
+              });
+              pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.linear);
+            },
+          ),
         ),
       ),
     );

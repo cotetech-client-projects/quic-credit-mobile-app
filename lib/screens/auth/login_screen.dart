@@ -12,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
+  bool _toggleVisibility = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,8 +50,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     // field for password
                     CustomForm(
                       controller: passwordController,
+                      obscureText: !_toggleVisibility,
                       labelText: "Password",
                       errorText: "Password is required",
+                      suffix: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _toggleVisibility = !_toggleVisibility;
+                          });
+                        },
+                        icon: Icon(
+                          !_toggleVisibility
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                      ),
                       hintText: "***********",
                     ),
                     const SizedBox(height: 10),
@@ -72,7 +86,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     CustomButton(
-                      onPress: () {},
+                      onPress: () => Routes.replacePage(
+                        const IndexHome(),
+                      ),
                       buttonColor: Theme.of(context).colorScheme.primary,
                       text: "Login",
                       buttonRadius: 10,

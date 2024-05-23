@@ -6,11 +6,13 @@ class CustomForm extends StatelessWidget {
   final String hintText;
   final String errorText;
   final bool readOnly;
+  final Widget? suffix;
   final bool obscureText;
   final TextInputType keyboardType;
   final TextInputAction inputAction;
   const CustomForm({
     super.key,
+    this.suffix,
     this.inputAction = TextInputAction.next,
     this.keyboardType = TextInputType.text,
     required this.controller,
@@ -42,6 +44,7 @@ class CustomForm extends StatelessWidget {
         obscureText: obscureText,
         decoration: InputDecoration(
           labelText: labelText,
+          suffixIcon: suffix,
           hintText: hintText,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
