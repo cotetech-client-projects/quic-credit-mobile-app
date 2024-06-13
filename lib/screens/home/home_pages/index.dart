@@ -1,4 +1,5 @@
 import 'package:quic_credit/screens/home/home_pages/widgets/quic_links.dart';
+import 'package:quic_credit/screens/home/quick_links/apply_loan.dart';
 
 import '/exports/exports.dart';
 
@@ -43,24 +44,24 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Space(space: 0.080),
+                        const Space(),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                           child: AutoSizeText.rich(
                             TextSpan(
                               children: [
-                                TextSpan(
-                                  //🌙
-                                  text: "☀️",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .apply(
-                                        fontWeightDelta: 1,
-                                        fontSizeDelta: 20,
-                                        color: Colors.white,
-                                      ),
-                                ),
+                                // TextSpan(
+                                //   //🌙
+                                //   text: "☀️",
+                                //   style: Theme.of(context)
+                                //       .textTheme
+                                //       .titleMedium!
+                                //       .apply(
+                                //         fontWeightDelta: 1,
+                                //         fontSizeDelta: 20,
+                                //         color: Colors.white,
+                                //       ),
+                                // ),
                                 TextSpan(
                                   text: "\nWelcome, Bruno",
                                   style: Theme.of(context)
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Center(
                     child: Container(
-                      margin: EdgeInsets.only(top: constraints.maxWidth * 0.01),
+                      margin: EdgeInsets.only(top: constraints.maxWidth * 0.11),
                       width: constraints.maxWidth * 0.88,
                       height: constraints.maxWidth * 0.35,
                       padding: const EdgeInsets.fromLTRB(12, 15, 10, 10),
@@ -186,7 +187,9 @@ class _HomePageState extends State<HomePage> {
                             color: Theme.of(context).colorScheme.primary,
                             title: "Apply for a Loan",
                             svgPath: "payment.svg",
-                            onTap: () {},
+                            onTap: () => Routes.animateToPage(
+                              const ApplyLoan(),
+                            ),
                           ),
                         ],
                       ),

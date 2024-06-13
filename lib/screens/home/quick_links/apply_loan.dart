@@ -11,7 +11,10 @@ class _ApplyLoanState extends State<ApplyLoan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      appBar: AppBar(
+        title: const Text('Apply Loan'),
+      ),
+      body: const Center(
         child: Text('Apply Loan'),
       ),
     );
