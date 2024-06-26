@@ -31,9 +31,10 @@ class _HomePageState extends State<HomePage> {
                 height: constraints.maxHeight * 0.35,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).brightness == Brightness.light
-                      ? Theme.of(context).primaryColor
-                      : Colors.grey.shade800,
+                  color: Theme.of(context).primaryColor,
+                  // color: Theme.of(context).brightness == Brightness.light
+                  //     ? Theme.of(context).primaryColor
+                  //     : Colors.grey.shade800,
                   borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(25),
                     bottomRight: Radius.circular(25),
@@ -99,14 +100,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Center(
                     child: Container(
-                      margin: EdgeInsets.only(top: constraints.maxWidth * 0.1),
+                      margin:
+                          EdgeInsets.only(top: constraints.maxHeight * 0.091),
                       width: constraints.maxWidth * 0.88,
                       height: constraints.maxWidth * 0.25,
                       padding: const EdgeInsets.fromLTRB(12, 15, 10, 10),
                       decoration: BoxDecoration(
                         color: Theme.of(context).brightness == Brightness.light
                             ? Colors.grey.shade50
-                            : Colors.grey.shade600,
+                            : Colors.black.withAlpha(230),
                         borderRadius: BorderRadius.circular(25),
                         boxShadow: [
                           BoxShadow(

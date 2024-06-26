@@ -1,5 +1,3 @@
-import 'package:quic_credit/widgets/space.dart';
-
 import '/exports/exports.dart';
 
 class ApplyLoan extends StatefulWidget {
@@ -10,6 +8,11 @@ class ApplyLoan extends StatefulWidget {
 }
 
 class _ApplyLoanState extends State<ApplyLoan> {
+  final loanAmountController = TextEditingController();
+  final loanTermAmountController = TextEditingController();
+  ScrollController stepController = ScrollController();
+  int currentStep = 0;
+  StepState currentStepState = StepState.indexed;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,39 +31,125 @@ class _ApplyLoanState extends State<ApplyLoan> {
       ),
       body: LayoutBuilder(builder: (context, constraints) {
         return Container(
-          width: constraints.maxWidth,
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(10)),
-          margin: const EdgeInsets.all(10),
-          padding: const EdgeInsets.all(10),
-          child: ListView(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Space(),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'Approved Loan Amount',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+            width: constraints.maxWidth,
+            height: constraints.maxHeight,
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(10)),
+            margin: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
+            child: Stepper(
+              currentStep: currentStep,
+              controller: stepController,
+              stepIconBuilder: (stepIndex, stepState) {
+                print(stepIndex);
+              },
+              onStepContinue: () {
+                if (currentStep >= 1) {
+                  setState(() {
+                    currentStepState = StepState.complete;
+                  });
+                } else {
+                  setState(() {
+                    currentStepState = StepState.editing;
+                  });
+                  setState(() {
+                    currentStep++;
+                  });
+                }
+              },
+              onStepCancel: () {
+                if (currentStep < 1) {
+                  setState(() {
+                    currentStep = 0;
+                  });
+                } else {
+                  setState(() {
+                    currentStepState = StepState.indexed;
+                    currentStep--;
+                  });
+                }
+              },
+              steps: [
+                Step(
+                  isActive: currentStep == 0,
+                  state: currentStep == 0
+                      ? StepState.editing
+                      : currentStep > 0
+                          ? StepState.complete
+                          : StepState.indexed,
+                  title: Text(
+                    "Request a a specific amount",
+                    style: Theme.of(context).textTheme.titleMedium!.apply(
+                          fontWeightDelta: 5,
+                        ),
+                  ),
+                  content: SizedBox(
+                    height: constraints.maxHeight * 0.45,
+                    child: ListView(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Loan Amount',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        CustomForm(
+                          controller: loanAmountController,
+                          labelText: "Loan Amount",
+                          errorText: "",
+                          hintText: "Provide the amount of money you need..",
+                        ),
+                        const Space(),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Loan Term',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        CustomForm(
+                          controller: loanTermAmountController,
+                          labelText: "Loan Term (in days)",
+                          errorText: "",
+                          hintText: "Provide the time for loan repayment..",
+                        ),
+                        const Space(),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Loan Interest',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        CustomForm(
+                          controller: loanTermAmountController,
+                          labelText: "Loan Term (in days)",
+                          errorText: "",
+                          readOnly: true,
+                          hintText: "Provide the time for loan repayment..",
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  "30,000",
-                  style: TextStyle(fontSize: 19),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(18, 0, 18, 0.0),
-                child: Divider(),
-              )
-            ],
-          ),
-        );
+                Step(
+                  isActive: currentStep == 1,
+                  state: currentStepState,
+                  title: Text("Submit Loan Request"),
+                  content: Text("Submit loan request"),
+                )
+              ],
+            ));
       }),
     );
   }
