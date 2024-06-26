@@ -51,14 +51,19 @@ class _SplashScreenState extends State<SplashScreen>
               fit: BoxFit.cover,
             ),
           ),
-           Space(space:0.22),
+          const Space(space: 0.22),
           SpinKitDualRing(
             size: 35.0,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).primaryColor,
           ),
-        Space(space:0.1),
-        Text("Powered by COTE Limited",style:Theme.of(context).textTheme.bodyLarge!.apply(fontWeightDelta:3,),),
-         Space(space:0.052),
+          const Space(space: 0.13),
+          Text(
+            "Powered by COTE Limited",
+            style: Theme.of(context).textTheme.bodyLarge!.apply(
+                  fontWeightDelta: 3,
+                ),
+          ),
+          const Space(space: 0.052),
         ],
       ),
     );

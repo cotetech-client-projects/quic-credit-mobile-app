@@ -23,7 +23,7 @@ class DesignWidget extends StatelessWidget {
             ),
             child: Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                color: Theme.of(context).primaryColor.withOpacity(0.43),
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(50),
                   bottomRight: Radius.circular(200),

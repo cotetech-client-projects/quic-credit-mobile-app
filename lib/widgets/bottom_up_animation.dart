@@ -17,7 +17,7 @@ class _BottomTopMoveAnimationViewState extends State<BottomTopMoveAnimationView>
   void initState() {
     super.initState();
     animationController = AnimationController(
-      duration: const Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 900),
       vsync: this,
     )..forward();
   }
@@ -26,7 +26,9 @@ class _BottomTopMoveAnimationViewState extends State<BottomTopMoveAnimationView>
   @override
   void dispose() {
     super.dispose();
-    animationController!.dispose();
+    if (animationController!.isCompleted) {
+      animationController!.dispose();
+    }
   }
 
   @override

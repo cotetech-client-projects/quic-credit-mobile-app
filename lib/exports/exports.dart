@@ -9,7 +9,7 @@ export 'package:flutter_svg/flutter_svg.dart';
 export 'package:google_nav_bar/google_nav_bar.dart';
 export 'package:auto_size_text/auto_size_text.dart';
 export "package:shared_preferences/shared_preferences.dart";
-
+export 'package:animations/animations.dart';
 // routes
 export "/routes/routes.dart";
 
@@ -33,6 +33,7 @@ export "/widgets/text_styles.dart";
 export "/widgets/custom_form.dart";
 export '/widgets/bottom_up_animation.dart';
 export '/screens/auth/widgets/body.dart';
+export '/widgets/custom_animated_widget.dart';
 // screens
 export "/screens/onboard/onboard_screen.dart";
 export "/screens/onboard/splash_screen.dart";
@@ -57,4 +58,4 @@ export '/services/storage_services.dart';
 export '/services/session_service.dart';
 
 // controllers
-export "package:quic_credit/controllers/theme_controller.dart";
+export "/controllers/theme_controller.dart";

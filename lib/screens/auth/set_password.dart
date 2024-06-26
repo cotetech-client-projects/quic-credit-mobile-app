@@ -15,7 +15,10 @@ class _SetPasswordState extends State<SetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Set Password"),
+        title: Text(
+          "Set Password",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -29,6 +32,7 @@ class _SetPasswordState extends State<SetPassword> {
                   'Ensure that the password is secure',
                   style: Theme.of(context).textTheme.bodyLarge!.apply(
                         fontWeightDelta: 2,
+                        fontSizeDelta: 2,
                       ),
                 ),
               ),
@@ -57,7 +61,7 @@ class _SetPasswordState extends State<SetPassword> {
                   Routes.pushPage(Routes.completeProfile);
                 },
                 text: "Continue",
-                buttonColor: Theme.of(context).colorScheme.primary,
+                buttonColor: Theme.of(context).primaryColor,
                 buttonRadius: 10,
                 textColor: Colors.white,
               ),

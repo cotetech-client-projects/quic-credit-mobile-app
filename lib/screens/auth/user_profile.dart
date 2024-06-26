@@ -28,7 +28,7 @@ class _UserProfileState extends State<UserProfile> {
   int male = -1;
   int female = -1;
 
-  // @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: AuthBody(
@@ -43,7 +43,7 @@ class _UserProfileState extends State<UserProfile> {
                 child: Text(
                   'Add Your Personal Information',
                   style: Theme.of(context).textTheme.titleLarge!.apply(
-                        color: Theme.of(context).colorScheme.primary,
+                        color: Theme.of(context).primaryColor,
                         fontWeightDelta: 4,
                         fontSizeDelta: 1,
                       ),
@@ -227,7 +227,7 @@ class _UserProfileState extends State<UserProfile> {
                     Routes.pushPage(Routes.work);
                   }
                 },
-                buttonColor: Theme.of(context).colorScheme.primary,
+                buttonColor: Theme.of(context).primaryColor,
                 text: "Submit Profile",
                 buttonRadius: 10,
                 textColor: Colors.white,

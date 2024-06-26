@@ -1,6 +1,7 @@
-import 'package:quic_credit/screens/home/home_pages/widgets/quic_links.dart';
-import 'package:quic_credit/screens/home/quick_links/apply_loan.dart';
+import 'package:quic_credit/screens/home/quick_links/loan_repay.dart';
 
+import '/screens/home/home_pages/widgets/quic_links.dart';
+import '/screens/home/quick_links/apply_loan.dart';
 import '/exports/exports.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,9 +15,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).brightness == Brightness.light
-          ? Colors.grey.shade200
-          : Theme.of(context).scaffoldBackgroundColor,
+      appBar: AppBar(
+        elevation: 0,
+        toolbarHeight: 0,
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
+      // backgroundColor: Theme.of(context).brightness == Brightness.light
+      //     ? Colors.grey.shade200
+      //     : Theme.of(context).scaffoldBackgroundColor,
       body: BottomTopMoveAnimationView(
         child: LayoutBuilder(builder: (context, constraints) {
           return Stack(
@@ -26,7 +32,7 @@ class _HomePageState extends State<HomePage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Theme.of(context).brightness == Brightness.light
-                      ? Theme.of(context).colorScheme.primary
+                      ? Theme.of(context).primaryColor
                       : Colors.grey.shade800,
                   borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(25),
@@ -36,8 +42,8 @@ class _HomePageState extends State<HomePage> {
               ),
               // card to display summary of bills
 
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              ListView(
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -45,57 +51,57 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Space(),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: AutoSizeText.rich(
-                            TextSpan(
-                              children: [
-                                // TextSpan(
-                                //   //🌙
-                                //   text: "☀️",
-                                //   style: Theme.of(context)
-                                //       .textTheme
-                                //       .titleMedium!
-                                //       .apply(
-                                //         fontWeightDelta: 1,
-                                //         fontSizeDelta: 20,
-                                //         color: Colors.white,
-                                //       ),
-                                // ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              child: AutoSizeText.rich(
                                 TextSpan(
-                                  text: "\nWelcome, Bruno",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge!
-                                      .apply(
-                                        fontWeightDelta: 28,
-                                        fontSizeDelta: 3,
-                                        color: Colors.white,
-                                      ),
+                                  children: [
+                                    TextSpan(
+                                      text: "\nWelcome, Bruno",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge!
+                                          .apply(
+                                            fontWeightDelta: 28,
+                                            fontSizeDelta: 3,
+                                            color: Colors.white,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: "\nYou have no current loan.",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .apply(
+                                            fontWeightDelta: 1,
+                                            fontSizeDelta: 3,
+                                            color: Colors.white,
+                                          ),
+                                    ),
+                                  ],
                                 ),
-                                TextSpan(
-                                  text: "\nYou have no current loan.",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .apply(
-                                        fontWeightDelta: 1,
-                                        fontSizeDelta: 3,
-                                        color: Colors.white,
-                                      ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
+                            const CustomAnimatedWidget(
+                              child: Icon(
+                                Icons.notifications,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
                         ),
                       ],
                     ),
                   ),
                   Center(
                     child: Container(
-                      margin: EdgeInsets.only(top: constraints.maxWidth * 0.11),
+                      margin: EdgeInsets.only(top: constraints.maxWidth * 0.1),
                       width: constraints.maxWidth * 0.88,
-                      height: constraints.maxWidth * 0.35,
+                      height: constraints.maxWidth * 0.25,
                       padding: const EdgeInsets.fromLTRB(12, 15, 10, 10),
                       decoration: BoxDecoration(
                         color: Theme.of(context).brightness == Brightness.light
@@ -132,30 +138,36 @@ class _HomePageState extends State<HomePage> {
                                     text: "\nUGX 0.00",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .headlineLarge!
+                                        .headlineMedium!
                                         .apply(
                                           fontWeightDelta: 31,
-                                          fontSizeDelta: 3,
+                                          fontSizeDelta: 1,
                                         ),
                                   ),
                                 ]),
                             textAlign: TextAlign.center,
-                            maxFontSize: 40,
+                            maxFontSize: 30,
                             minFontSize: 10,
                           ),
                         ],
                       ),
                     ),
                   ),
+                  const Space(
+                    space: .05,
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(18, 10, 18, 0),
                     child: Text(
                       "Quick Links",
-                      style: Theme.of(context).textTheme.bodyLarge!.apply(
+                      style: Theme.of(context).textTheme.headlineLarge!.apply(
                             fontWeightDelta: 61,
-                            fontSizeDelta: 5,
+                            fontSizeDelta: 3,
                           ),
                     ),
+                  ),
+                  const Space(
+                    space: .05,
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
@@ -170,26 +182,19 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           QuickLinkWidget(
                             height: constraints.maxHeight * 0.061,
-                            color: Colors.red,
-                            title: "Loan Breakdown",
-                            svgPath: "loan.svg",
-                            onTap: () {},
-                          ),
-                          QuickLinkWidget(
-                            height: constraints.maxHeight * 0.061,
                             color: Colors.green,
                             title: "Make loan Payment",
-                            svgPath: "payment.svg",
-                            onTap: () {},
+                            duration: const Duration(milliseconds: 4000),
+                            svgPath: "loan.svg",
+                            nextPage: const LoanRepay(),
                           ),
                           QuickLinkWidget(
+                            duration: const Duration(milliseconds: 3000),
                             height: constraints.maxHeight * 0.061,
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(context).primaryColor,
                             title: "Apply for a Loan",
                             svgPath: "payment.svg",
-                            onTap: () => Routes.animateToPage(
-                              const ApplyLoan(),
-                            ),
+                            nextPage: const ApplyLoan(),
                           ),
                         ],
                       ),

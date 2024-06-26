@@ -36,7 +36,7 @@ class _WorkInfoState extends State<WorkInfo> {
                     child: Text(
                       'Add Your Work Information',
                       style: Theme.of(context).textTheme.titleLarge!.apply(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(context).primaryColor,
                             fontWeightDelta: 4,
                             fontSizeDelta: 1,
                           ),
@@ -116,7 +116,7 @@ class _WorkInfoState extends State<WorkInfo> {
                         Routes.pushPage(Routes.familyInfo);
                       }
                     },
-                    buttonColor: Theme.of(context).colorScheme.primary,
+                    buttonColor: Theme.of(context).primaryColor,
                     text: "Continue",
                     buttonRadius: 10,
                     textColor: Colors.white,

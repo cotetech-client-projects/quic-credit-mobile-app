@@ -77,7 +77,7 @@ class _IndexAuthPageState extends State<IndexAuthPage> {
                       SizedBox(
                         width: 160,
                         child: CustomButton(
-                          buttonColor: Theme.of(context).colorScheme.primary,
+                          buttonColor: Theme.of(context).primaryColor,
                           textColor: Colors.white,
                           onPress: () => Routes.pushPage(Routes.login),
                           text: "Login",
@@ -86,7 +86,7 @@ class _IndexAuthPageState extends State<IndexAuthPage> {
                       SizedBox(
                         width: 160,
                         child: CustomButton(
-                          buttonColor: Colors.green.shade400.withOpacity(0.78),
+                          buttonColor: const Color.fromARGB(255, 5, 150, 9),
                           fontWeight: FontWeight.w900,
                           textColor: Colors.white,
                           onPress: () => Routes.pushReplace(

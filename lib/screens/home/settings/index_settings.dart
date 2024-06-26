@@ -1,4 +1,5 @@
-import 'package:quic_credit/screens/home/settings/theme_widget.dart';
+import '/screens/home/notifications/notifications_page.dart';
+import '/screens/home/settings/theme_widget.dart';
 
 import '/exports/exports.dart';
 
@@ -17,10 +18,16 @@ class _IndexSettingsState extends State<IndexSettings>
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(
+      duration: const Duration(
         milliseconds: 500,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    animationController!.dispose();
+    super.dispose();
   }
 
   @override
@@ -37,7 +44,7 @@ class _IndexSettingsState extends State<IndexSettings>
           // ignore: prefer_const_literals_to_create_immutables
           children: [
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.color_lens,
               ),
               title: Text(
@@ -63,12 +70,12 @@ class _IndexSettingsState extends State<IndexSettings>
                     });
               },
             ),
-            const ListTile(
-              leading: Icon(
+            ListTile(
+              leading: const Icon(
                 Icons.notifications,
               ),
-              title: Text("Notifications"),
-              // onTap: () => Routes.pushPage(const Notifications()),
+              title: const Text("Notifications"),
+              onTap: () => Routes.animateToPage(const NotificationsPage()),
             ),
           ],
         );

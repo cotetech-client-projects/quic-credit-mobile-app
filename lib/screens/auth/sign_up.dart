@@ -27,7 +27,7 @@ class _SignUpState extends State<SignUp> {
                     child: Text(
                       'Sign Up',
                       style: Theme.of(context).textTheme.headlineLarge!.apply(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(context).primaryColor,
                             fontWeightDelta: 8,
                             fontSizeDelta: 6,
                           ),
@@ -44,7 +44,7 @@ class _SignUpState extends State<SignUp> {
                   const Space(space: 0.041),
                   CustomButton(
                     onPress: () => Routes.pushPage(Routes.otp),
-                    buttonColor: Theme.of(context).colorScheme.primary,
+                    buttonColor: Theme.of(context).primaryColor,
                     text: "Register",
                     buttonRadius: 10,
                     textColor: Colors.white,
@@ -65,7 +65,7 @@ class _SignUpState extends State<SignUp> {
                                   ),
                             style: Theme.of(context).textTheme.bodyLarge!.apply(
                                   fontWeightDelta: 4,
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(context).primaryColor,
                                 ),
                           ),
                         ],

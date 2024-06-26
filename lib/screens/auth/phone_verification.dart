@@ -42,101 +42,103 @@ class _PhoneVerificationState extends State<PhoneVerification> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              "assets/svgs/otp_verify.svg",
-              width: 300,
-              height: 300,
-              fit: BoxFit.cover,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 10, 10),
-              child: Text(
-                'Enter the code sent to your phone',
-                style: Theme.of(context).textTheme.bodyLarge!.apply(
-                      // color: Theme.of(context).colorScheme.primary,
-                      fontWeightDelta: 1,
-                      fontSizeDelta: 2,
-                    ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                "assets/svgs/otp_verify.svg",
+                width: 300,
+                height: 300,
+                fit: BoxFit.cover,
               ),
-            ),
-            Directionality(
-              // Specify direction if desired
-              textDirection: TextDirection.ltr,
-              child: Pinput(
-                pinAnimationType: PinAnimationType.slide,
-                length: 6,
-                controller: controller,
-                focusNode: focusNode,
-                androidSmsAutofillMethod:
-                    AndroidSmsAutofillMethod.smsUserConsentApi,
-                listenForMultipleSmsOnAndroid: true,
-                defaultPinTheme: defaultPinTheme,
-                // validator: (value) {
-                //   return value == '2222' ? null : 'Pin is incorrect';
-                // },
-                hapticFeedbackType: HapticFeedbackType.lightImpact,
-                onCompleted: (pin) {
-                  debugPrint('onCompleted: $pin');
-                },
-                onChanged: (value) {
-                  debugPrint('onChanged: $value');
-                },
-                cursor: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 9),
-                      width: 22,
-                      height: 1,
-                      color: focusedBorderColor,
-                    ),
-                  ],
-                ),
-                focusedPinTheme: defaultPinTheme.copyWith(
-                  decoration: defaultPinTheme.decoration!.copyWith(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: focusedBorderColor),
-                  ),
-                ),
-                submittedPinTheme: defaultPinTheme.copyWith(
-                  decoration: defaultPinTheme.decoration!.copyWith(
-                    color: fillColor,
-                    borderRadius: BorderRadius.circular(19),
-                    border: Border.all(color: focusedBorderColor),
-                  ),
-                ),
-                errorPinTheme: defaultPinTheme.copyBorderWith(
-                  border: Border.all(color: Colors.redAccent),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 10, 10),
+                child: Text(
+                  'Enter the code sent to your phone',
+                  style: Theme.of(context).textTheme.bodyLarge!.apply(
+                        // color: Theme.of(context).colorScheme.primary,
+                        fontWeightDelta: 1,
+                        fontSizeDelta: 2,
+                      ),
                 ),
               ),
-            ),
-            // TextButton(
-            //   onPressed: () => formKey.currentState!.validate(),
-            //   child: const Text('Validate'),
-            // ),
-            const SizedBox(height: 20),
-            Center(
-              child: CustomButton(
-                  text: "Verify",
-                  buttonColor: Theme.of(context).colorScheme.primary,
-                  textColor: Colors.white,
-                  onPress: () {
-                    if (controller.text.length == 6) {
-                      Routes.pushPage(Routes.newPass);
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Please enter a valid code"),
-                        ),
-                      );
-                    }
-                  }),
-            ),
-          ],
+              Directionality(
+                // Specify direction if desired
+                textDirection: TextDirection.ltr,
+                child: Pinput(
+                  pinAnimationType: PinAnimationType.slide,
+                  length: 6,
+                  controller: controller,
+                  focusNode: focusNode,
+                  androidSmsAutofillMethod:
+                      AndroidSmsAutofillMethod.smsUserConsentApi,
+                  listenForMultipleSmsOnAndroid: true,
+                  defaultPinTheme: defaultPinTheme,
+                  // validator: (value) {
+                  //   return value == '2222' ? null : 'Pin is incorrect';
+                  // },
+                  hapticFeedbackType: HapticFeedbackType.lightImpact,
+                  onCompleted: (pin) {
+                    debugPrint('onCompleted: $pin');
+                  },
+                  onChanged: (value) {
+                    debugPrint('onChanged: $value');
+                  },
+                  cursor: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 9),
+                        width: 22,
+                        height: 1,
+                        color: focusedBorderColor,
+                      ),
+                    ],
+                  ),
+                  focusedPinTheme: defaultPinTheme.copyWith(
+                    decoration: defaultPinTheme.decoration!.copyWith(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: focusedBorderColor),
+                    ),
+                  ),
+                  submittedPinTheme: defaultPinTheme.copyWith(
+                    decoration: defaultPinTheme.decoration!.copyWith(
+                      color: fillColor,
+                      borderRadius: BorderRadius.circular(19),
+                      border: Border.all(color: focusedBorderColor),
+                    ),
+                  ),
+                  errorPinTheme: defaultPinTheme.copyBorderWith(
+                    border: Border.all(color: Colors.redAccent),
+                  ),
+                ),
+              ),
+              // TextButton(
+              //   onPressed: () => formKey.currentState!.validate(),
+              //   child: const Text('Validate'),
+              // ),
+              const SizedBox(height: 20),
+              Center(
+                child: CustomButton(
+                    text: "Verify",
+                    buttonColor: Theme.of(context).primaryColor,
+                    textColor: Colors.white,
+                    onPress: () {
+                      if (controller.text.length == 6) {
+                        Routes.pushPage(Routes.newPass);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Please enter a valid code"),
+                          ),
+                        );
+                      }
+                    }),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -23,9 +23,9 @@ class ProfileCard extends StatelessWidget {
             color: Theme.of(context).brightness == Brightness.light
                 ? Colors.grey.shade200
                 : Colors.white30,
-            blurRadius: 9,
-            spreadRadius: 0.5,
-            offset: const Offset(3, 3),
+            blurRadius: .2,
+            spreadRadius: 0.15,
+            offset: const Offset(0.2, 1.3),
           )
         ],
       ),

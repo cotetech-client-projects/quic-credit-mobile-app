@@ -40,6 +40,11 @@ class OnboardingScreen extends StatelessWidget {
     );
     return Scaffold(
       backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        toolbarHeight: 0,
+        backgroundColor: Colors.transparent,
+      ),
       body: PageView.builder(
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
@@ -59,7 +64,7 @@ class OnboardingScreen extends StatelessWidget {
             count: pages.length,
             axisDirection: Axis.horizontal,
             effect: WormEffect(
-              activeDotColor: Theme.of(context).colorScheme.primary,
+              activeDotColor: Theme.of(context).primaryColor,
               // // dotHeight: 15,
               // dotWidth: 15,
               type: WormType.normal,
@@ -80,10 +85,11 @@ class OnboardingScreen extends StatelessWidget {
                   );
                 }
               },
-              child: const Center(
+              child: Center(
                 child: Icon(
                   Icons.arrow_forward,
                   size: 30,
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
             ),

@@ -1,45 +1,39 @@
 import '/exports/exports.dart';
 
-class IndexActivity extends StatefulWidget {
-  const IndexActivity({super.key});
+class NotificationsPage extends StatefulWidget {
+  const NotificationsPage({super.key});
 
   @override
-  State<IndexActivity> createState() => _IndexActivityState();
+  State<NotificationsPage> createState() => _NotificationsPageState();
 }
 
-class _IndexActivityState extends State<IndexActivity> {
+class _NotificationsPageState extends State<NotificationsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        leading: const Center(),
         title: Text(
-          "Transaction History",
-          style: Theme.of(context).textTheme.titleLarge!.apply(
-                fontStyle: FontStyle.normal,
-                fontWeightDelta: 2,
-              ),
+          "Notifications",
+          style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
             child: CustomAnimatedWidget(
-              duration: const Duration(milliseconds: 4000),
               child: SvgPicture.asset(
-                "assets/svgs/no-transaction.svg",
+                "assets/svgs/notifications.svg",
                 width: 300,
                 height: 300,
               ),
             ),
           ),
           Text(
-            "No Transactions yet",
+            "No notifications",
             style: Theme.of(context).textTheme.titleLarge!.apply(
                   fontWeightDelta: 10,
+                  fontSizeFactor: 1.12,
                 ),
           )
         ],

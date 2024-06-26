@@ -50,7 +50,7 @@ class _FamilyInfoState extends State<FamilyInfo> {
                   child: Text(
                     'Add Your Family Information',
                     style: Theme.of(context).textTheme.titleLarge!.apply(
-                          color: Theme.of(context).colorScheme.primary,
+                          color: Theme.of(context).primaryColor,
                           fontWeightDelta: 4,
                           fontSizeDelta: 1,
                         ),
@@ -157,7 +157,7 @@ class _FamilyInfoState extends State<FamilyInfo> {
                         "Add Contact",
                         style: Theme.of(context).textTheme.bodyLarge!.apply(
                               fontWeightDelta: 2,
-                              color: Theme.of(context).colorScheme.primary,
+                              color: Theme.of(context).primaryColor,
                             ),
                       ),
                     ),
@@ -170,7 +170,7 @@ class _FamilyInfoState extends State<FamilyInfo> {
                       Routes.pushPage(Routes.home);
                     }
                   },
-                  buttonColor: Theme.of(context).colorScheme.primary,
+                  buttonColor: Theme.of(context).primaryColor,
                   text: "Submit Changes ",
                   buttonRadius: 10,
                   textColor: Colors.white,

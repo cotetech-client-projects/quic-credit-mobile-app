@@ -59,11 +59,26 @@ class Routes {
     Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false);
   }
 
+  static Widget animateTo(
+      {required Widget closedWidget,
+      required Widget openWidget,
+      Duration duration = const Duration(milliseconds: 500)}) {
+    return OpenContainer(
+        closedElevation: 0,
+        openElevation: 0,
+        closedColor: Colors.transparent,
+        openColor: Colors.transparent,
+        transitionDuration: duration,
+        transitionType: ContainerTransitionType.fade,
+        closedBuilder: (context, fn) => closedWidget,
+        openBuilder: (context, fn) => openWidget);
+  }
+
   static void animateToPage(Widget page, {type = 'fade'}) {
     Navigator.of(context).push(
       PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 600),
-        reverseTransitionDuration: const Duration(milliseconds: 400),
+        transitionDuration: const Duration(milliseconds: 300),
+        reverseTransitionDuration: const Duration(milliseconds: 300),
         pageBuilder: (context, animation, secondaryAnimation) => type == 'slide'
             ? SlideTransition(
                 position: animation.drive(Tween<Offset>(

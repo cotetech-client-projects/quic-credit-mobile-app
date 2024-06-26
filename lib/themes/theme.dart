@@ -5,20 +5,20 @@ class Themes {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     // backgroundColor: Colors.white,
   );
-  static Color primaryColor = const Color.fromARGB(1, 98, 159, 255);
+  static Color primaryColor = const Color.fromARGB(255, 8, 73, 212);
   static TextTheme textTheme = GoogleFonts.nunitoTextTheme();
 // light theme
   static ThemeData lightTheme = ThemeData(
     drawerTheme: drawerTheme,
     textTheme: textTheme.apply(
-      displayColor: Colors.black,
-      bodyColor: Colors.black,
-      decorationColor: Colors.black,
-    ),
+        // displayColor: Colors.black,
+        // bodyColor: Colors.black,
+        // decorationColor: Colors.black,
+        ),
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryColor,
       // brightness: Brightness.light,
-      background: Colors.white,
+      // background: Colors.white,
     ),
     primaryColor: primaryColor,
     useMaterial3: true,
@@ -34,7 +34,7 @@ class Themes {
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryColor,
       brightness: Brightness.dark,
-      background: Colors.black,
+      // background: Colors.black,
     ),
     primaryColor: primaryColor,
     useMaterial3: true,
