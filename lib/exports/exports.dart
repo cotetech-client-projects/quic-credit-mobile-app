@@ -10,6 +10,7 @@ export 'package:google_nav_bar/google_nav_bar.dart';
 export 'package:auto_size_text/auto_size_text.dart';
 export "package:shared_preferences/shared_preferences.dart";
 export 'package:animations/animations.dart';
+export 'package:http/http.dart';
 // routes
 export "/routes/routes.dart";
 
@@ -59,3 +60,4 @@ export '/services/session_service.dart';
 
 // controllers
 export "/controllers/theme_controller.dart";
+export "/controllers/auth_controller.dart";

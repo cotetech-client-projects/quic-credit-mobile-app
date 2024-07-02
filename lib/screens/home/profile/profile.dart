@@ -1,3 +1,7 @@
+import 'package:quic_credit/screens/home/notifications/notifications_page.dart';
+import 'package:quic_credit/screens/home/profile/contact_us.dart';
+import 'package:quic_credit/screens/home/profile/faqs_page.dart';
+
 import '../settings/invite_page.dart';
 import '/screens/home/profile/widgets/profile_card.dart';
 import '/screens/home/settings/index_settings.dart';
@@ -74,6 +78,16 @@ class _ProfilePageState extends State<ProfilePage> {
                     space: 0.02,
                   ),
                   ProfileCard(
+                    text: "Notifications",
+                    onTap: () => Routes.animateToPage(
+                      const NotificationsPage(),
+                    ),
+                    icon: const Icon(Icons.message_outlined),
+                  ),
+                  const Space(
+                    space: 0.02,
+                  ),
+                  ProfileCard(
                     text: "Privacy Policy",
                     onTap: () => Routes.animateToPage(
                       const PrivacyPage(),
@@ -84,17 +98,30 @@ class _ProfilePageState extends State<ProfilePage> {
                     space: 0.02,
                   ),
                   ProfileCard(
-                    text: "Invite a friend",
+                    text: "FAQs",
                     onTap: () => Routes.animateToPage(
-                      const InvitePage(),
+                      const FaqsPage(),
                     ),
                     icon: const Icon(
-                      Icons.share,
+                      Icons.question_answer_outlined,
                     ),
                   ),
                   const Space(
                     space: 0.02,
                   ),
+                  // ProfileCard(
+                  //   text: "Contact us",
+                  //   onTap: () => Routes.animateToPage(
+                  //     const ContactUs(),
+                  //   ),
+                  //   icon: const Icon(
+                  //     Icons.contact_support_outlined,
+                  //   ),
+                  // ),
+                  // const Space(
+                  //   space: 0.02,
+                  // ),
+
                   ProfileCard(
                     text: "Logout ",
                     onTap: () {
@@ -115,8 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    SystemNavigator.setFrameworkHandlesBack(
-                                        true);
+                                    Routes.pushReplace(Routes.login);
                                   },
                                   child: Text(
                                     "Logout",

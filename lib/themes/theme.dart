@@ -6,8 +6,10 @@ class Themes {
     // backgroundColor: Colors.white,
   );
   static Color primaryColor = const Color.fromARGB(255, 8, 73, 212);
-  static TextTheme textTheme = GoogleFonts.nunitoTextTheme();
+  static TextTheme textTheme =
+      GoogleFonts.poppinsTextTheme(); //GoogleFonts.nunitoTextTheme();
 // light theme
+
   static ThemeData lightTheme = ThemeData(
     drawerTheme: drawerTheme,
     textTheme: textTheme.apply(

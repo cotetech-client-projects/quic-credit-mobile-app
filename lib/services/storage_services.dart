@@ -33,7 +33,7 @@ class StorageService {
   // function to retrieve saved data
   Future<dynamic> getData(String key) async {
     final SharedPreferences prefs = await sharedPreferences;
-    return json.decode(prefs.get(key) as String);
+    return prefs.get(key);
   }
 
   Future<String?> getString(String key) async {

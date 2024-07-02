@@ -29,29 +29,29 @@ class _LoanRepayState extends State<LoanRepay> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
               side: BorderSide(
-                color: Theme.of(context).primaryColor,
+                color: Colors.grey.shade300,
                 width: 1.2,
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
               child: Text.rich(
                 TextSpan(
-                  text: "Loan break down\n",
+                  text: "Loan Balance\n",
                   style: Theme.of(context).textTheme.titleLarge!.apply(
-                        fontWeightDelta: 2,
+                        fontWeightDelta: 1,
                       ),
                   children: [
                     TextSpan(
                       text: "\nAmount payable : ",
                       style: Theme.of(context).textTheme.bodyLarge!.apply(
-                            fontWeightDelta: 2,
+                            fontWeightDelta: 1,
                           ),
                     ),
                     TextSpan(
-                      text: " 30,000\n",
+                      text: " 30,000",
                       style: Theme.of(context).textTheme.bodyLarge!.apply(
-                            fontWeightDelta: 2,
+                            fontWeightDelta: 5,
                           ),
                     )
                   ],
@@ -63,7 +63,7 @@ class _LoanRepayState extends State<LoanRepay> {
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-              'Loan Term',
+              'Loan Amount',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class _LoanRepayState extends State<LoanRepay> {
           ),
           CustomForm(
             controller: loanRepaymentController,
-            labelText: "Loan amount",
+            labelText: "Amount",
             errorText: "",
             keyboardType: TextInputType.number,
             hintText: "Enter amount you're paying",

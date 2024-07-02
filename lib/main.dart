@@ -27,6 +27,9 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => ThemeController(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => AuthController(),
+        ),
       ],
       child: Consumer<ThemeController>(builder: (context, controller, co) {
         return MaterialApp(

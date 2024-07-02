@@ -1,3 +1,5 @@
+import 'package:quic_credit/widgets/transaction_widget.dart';
+
 import '/exports/exports.dart';
 
 class IndexActivity extends StatefulWidget {
@@ -22,26 +24,30 @@ class _IndexActivityState extends State<IndexActivity> {
               ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: ListView(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
-            child: CustomAnimatedWidget(
-              duration: const Duration(milliseconds: 4000),
-              child: SvgPicture.asset(
-                "assets/svgs/no-transaction.svg",
-                width: 300,
-                height: 300,
-              ),
-            ),
+          // Center(
+          //   child: CustomAnimatedWidget(
+          //     duration: const Duration(milliseconds: 4000),
+          //     child: SvgPicture.asset(
+          //       "assets/svgs/no-transaction.svg",
+          //       width: 300,
+          //       height: 300,
+          //     ),
+          //   ),
+          // ),
+          // Text(
+          //   "No Transactions yet",
+          //   style: Theme.of(context).textTheme.titleLarge!.apply(
+          //         fontWeightDelta: 10,
+          //       ),
+          // )
+          ...List.generate(
+            10,
+            (index) => const TransactionWidget(),
           ),
-          Text(
-            "No Transactions yet",
-            style: Theme.of(context).textTheme.titleLarge!.apply(
-                  fontWeightDelta: 10,
-                ),
-          )
         ],
       ),
     );

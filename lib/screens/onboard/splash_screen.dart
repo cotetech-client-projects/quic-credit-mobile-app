@@ -26,7 +26,16 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _animationController.repeat(reverse: true);
     Future.delayed(const Duration(seconds: 3), () {
-      Routes.pushReplace(Routes.onboard);
+      // check if user is first time user
+      StorageService().getData('firstTimeUser').then((value) {
+        if (value == null) {
+          StorageService().setData('firstTimeUser', true);
+          Routes.pushReplace(Routes.onboard);
+        } else {
+          // route to auth index
+          Routes.pushReplace(Routes.indexAuth);
+        }
+      });
     });
   }
 

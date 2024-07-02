@@ -6,6 +6,7 @@ class CustomButton extends StatelessWidget {
   final double buttonRadius;
   final Color? buttonColor;
   final Color? textColor;
+  final bool loading;
   final double opacity;
   final double? width;
   final FontWeight? fontWeight;
@@ -13,6 +14,7 @@ class CustomButton extends StatelessWidget {
   const CustomButton(
       {super.key,
       this.text = '',
+      this.loading = false,
       required this.onPress,
       this.buttonHeight = 50,
       this.buttonRadius = 20,
@@ -35,15 +37,19 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(buttonRadius),
         ),
         child: Center(
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.bodyLarge!.apply(
-                  fontWeightDelta: 4,
-                  fontSizeDelta: 2,
-                  color: textColor ?? Theme.of(context).primaryColor,
+          child: loading == true
+              ? const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                )
+              : Text(
+                  text,
+                  style: Theme.of(context).textTheme.bodyLarge!.apply(
+                        fontWeightDelta: 4,
+                        fontSizeDelta: 2,
+                        color: textColor ?? Theme.of(context).primaryColor,
+                      ),
+                  textAlign: TextAlign.center,
                 ),
-            textAlign: TextAlign.center,
-          ),
         ),
       ),
     );

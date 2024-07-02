@@ -78,6 +78,8 @@ class OnboardingScreen extends StatelessWidget {
               onPressed: () {
                 if (pageController.page == pages.length - 1) {
                   Routes.pushReplace(Routes.indexAuth);
+                  // capture firsttime user event
+                  StorageService().setData('firstTimeUser', false);
                 } else {
                   pageController.nextPage(
                     duration: const Duration(milliseconds: 500),
