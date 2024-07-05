@@ -13,6 +13,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final usernameController = TextEditingController();
+  final phoneController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmController = TextEditingController();
@@ -46,10 +47,17 @@ class _SignUpState extends State<SignUp> {
                   const Space(space: 0.041),
                   CustomForm(
                     controller: usernameController,
-                    labelText: "Username",
+                    labelText: "Name",
                     readOnly: auth.authLoading,
                     keyboardType: TextInputType.text,
-                    hintText: "Enter your username",
+                    hintText: "Enter your first-name and last-name",
+                  ),
+                  CustomForm(
+                    controller: phoneController,
+                    labelText: "Phone Number",
+                    readOnly: auth.authLoading,
+                    keyboardType: TextInputType.phone,
+                    hintText: "07xxx-xxxx-xxxx",
                   ),
                   CustomForm(
                     controller: emailController,
@@ -99,13 +107,37 @@ class _SignUpState extends State<SignUp> {
                     buttonHeight: 55,
                     loading: auth.authLoading,
                     onPress: () {
+                      auth.authLoading = true;
                       if (formKey.currentState!.validate()) {
+                        auth.authLoading = true;
                         if (passwordController.text != confirmController.text) {
-                          log("Passwords do not match");
+                          showMessage(
+                            "Passwords do not match",
+                            color: Colors.red,
+                          );
                           return;
                         } else {
-                          log("Passwords match");
+                          AuthService().register({
+                            "role_id": 2,
+                            "first_name":
+                                usernameController.text.split(" ").first,
+                            "last_name":
+                                usernameController.text.split(" ").last,
+                            "email": emailController.text,
+                            "contact": phoneController.text,
+                            "password": passwordController.text,
+                            "password_confirmation": confirmController.text,
+                          }).then((value) {
+                            auth.authLoading = false;
+                            showMessage(value);
+                            Routes.pushPage(Routes.login);
+                          }).onError((e, stack) {
+                            auth.authLoading = false;
+                            showMessage(e.toString(), color: Colors.red);
+                          });
                         }
+                      } else {
+                        auth.authLoading = false;
                       }
                     },
                     buttonColor: Theme.of(context).primaryColor,

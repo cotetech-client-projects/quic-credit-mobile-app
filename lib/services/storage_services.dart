@@ -1,3 +1,5 @@
+import "package:quic_credit/models/user_model.dart";
+
 import "/exports/exports.dart";
 import "dart:convert";
 
@@ -45,5 +47,15 @@ class StorageService {
     if (_sharedPreferences != null) {
       await _sharedPreferences?.remove(field);
     }
+  }
+
+  // get user data
+  Future<UserModel> getUserData() async {
+    final SharedPreferences prefs = await sharedPreferences;
+    var user = prefs.getString("user");
+    if (user != null) {
+      return userModelFromJson(user);
+    }
+    return UserModel.fromJson({});
   }
 }

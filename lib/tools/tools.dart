@@ -22,3 +22,38 @@ void showSheet(List<Map<String, dynamic>> data, ValueChanged<String> selected) {
             });
       });
 }
+
+// global function to show a snackbar
+void showMessage(String message, {Color? color}) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text(message),
+    backgroundColor: color,
+  ));
+}
+
+// loading dialog
+void showLoadingDialog({String? text}) {
+  showAdaptiveDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          // title: const Icon(
+          //   Icons.logout,
+          //   color: Colors.red,
+          // ),
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  text ?? "Loading...",
+                ),
+                const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+              ],
+            )
+          ],
+        );
+      });
+}

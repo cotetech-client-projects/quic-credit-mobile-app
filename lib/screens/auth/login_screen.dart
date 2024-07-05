@@ -1,5 +1,5 @@
 import 'package:flutter/gestures.dart';
-
+import '/services/auth_service.dart';
 import '/exports/exports.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -31,7 +31,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.all(20.0),
                 children: [
                   const Space(
-                    space: 0.2,
+                    space: 0.0,
+                  ),
+                  SvgPicture.asset(
+                    "assets/svgs/login.svg",
+                    fit: BoxFit.cover,
+                    height: 200,
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(8, 0, 10, 10),
@@ -48,9 +53,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   // field for email
                   CustomForm(
                     controller: phoneController,
-                    labelText: "Username",
-                    keyboardType: TextInputType.text,
-                    hintText: "Enter your username",
+                    labelText: "Email",
+                    keyboardType: TextInputType.emailAddress,
+                    hintText: "example@gmail.com",
                     readOnly: auth.authLoading,
                     // icon: Icon(Icons.person),
                   ),
@@ -96,14 +101,30 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomButton(
                     loading: auth.authLoading,
                     onPress: () {
+                      auth.authLoading = true;
                       if (formKey.currentState!.validate()) {
-                        // controller.login(
-                        //   phoneController.text,
-                        //   passwordController.text,
-                        // );
-                        Routes.replacePage(
-                          const IndexHome(),
-                        );
+                        AuthService().login({
+                          "email": phoneController.text,
+                          "password": passwordController.text,
+                        }).then((value) {
+                          showMessage(
+                            value,
+                            color: Colors.green,
+                          );
+                          auth.authLoading = false;
+                          // route to home
+                          Routes.replacePage(
+                            const IndexHome(),
+                          );
+                        }).onError((error, stackTrace) {
+                          showMessage(
+                            error.toString(),
+                            color: Colors.red,
+                          );
+                          auth.authLoading = false;
+                        });
+                      } else {
+                        auth.authLoading = false;
                       }
                     },
                     buttonColor: Theme.of(context).primaryColor,

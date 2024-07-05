@@ -1,10 +1,3 @@
-import 'package:quic_credit/screens/home/notifications/notifications_page.dart';
-import 'package:quic_credit/screens/home/profile/contact_us.dart';
-import 'package:quic_credit/screens/home/profile/faqs_page.dart';
-
-import '../settings/invite_page.dart';
-import '/screens/home/profile/widgets/profile_card.dart';
-import '/screens/home/settings/index_settings.dart';
 import '/exports/exports.dart';
 import 'privacy_page.dart';
 
@@ -52,13 +45,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: "Mugamba Bruno",
+                          text:
+                              "${authenticatedUser.user?.user.firstName} ${authenticatedUser.user?.user.lastName}",
                           style: Theme.of(context).textTheme.titleLarge!.apply(
                                 fontWeightDelta: 10,
                               ),
                         ),
                         TextSpan(
-                          text: "\n@bruno\n",
+                          text: "\n${authenticatedUser.user?.user.email}\n",
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ],
@@ -109,18 +103,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   const Space(
                     space: 0.02,
                   ),
-                  // ProfileCard(
-                  //   text: "Contact us",
-                  //   onTap: () => Routes.animateToPage(
-                  //     const ContactUs(),
-                  //   ),
-                  //   icon: const Icon(
-                  //     Icons.contact_support_outlined,
-                  //   ),
-                  // ),
-                  // const Space(
-                  //   space: 0.02,
-                  // ),
 
                   ProfileCard(
                     text: "Logout ",
@@ -142,7 +124,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Routes.pushReplace(Routes.login);
+                                    Routes.popPage();
+                                    AuthService().logout();
                                   },
                                   child: Text(
                                     "Logout",

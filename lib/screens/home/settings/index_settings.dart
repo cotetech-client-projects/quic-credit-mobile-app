@@ -70,13 +70,13 @@ class _IndexSettingsState extends State<IndexSettings>
                     });
               },
             ),
-            ListTile(
-              leading: const Icon(
-                Icons.notifications,
-              ),
-              title: const Text("Notifications"),
-              onTap: () => Routes.animateToPage(const NotificationsPage()),
-            ),
+            // ListTile(
+            //   leading: const Icon(
+            //     Icons.notifications,
+            //   ),
+            //   title: const Text("Notifications"),
+            //   onTap: () => Routes.animateToPage(const NotificationsPage()),
+            // ),
           ],
         );
       }),

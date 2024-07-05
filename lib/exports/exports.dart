@@ -23,7 +23,7 @@ export "/main.dart";
 
 // models
 export "/models/onboarding_page_model.dart";
-
+export '/models/authenticated_user.dart';
 // widgets
 export "/widgets/onboard_page.dart";
 export "/widgets/space.dart";
@@ -50,14 +50,17 @@ export "/screens/auth/family_info.dart";
 export "/screens/auth/forgot_password.dart";
 // home screens
 export "/screens/home/index_home.dart";
-
+export '/screens/home/notifications/notifications_page.dart';
+export '/screens/home/profile/faqs_page.dart';
+export '/screens/home/profile/widgets/profile_card.dart';
+export '/screens/home/settings/index_settings.dart';
 // tools
 export '/tools/tools.dart';
 
 // services
 export '/services/storage_services.dart';
 export '/services/session_service.dart';
-
+export '/services/auth_service.dart';
 // controllers
 export "/controllers/theme_controller.dart";
 export "/controllers/auth_controller.dart";
