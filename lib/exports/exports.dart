@@ -24,6 +24,11 @@ export "/main.dart";
 // models
 export "/models/onboarding_page_model.dart";
 export '/models/authenticated_user.dart';
+export '/models/education_model.dart';
+export '/models/regions_model.dart';
+export '/models/relationships_model.dart';
+export '/models/salary_frequency_model.dart';
+export '/models/work_status_model.dart';
 // widgets
 export "/widgets/onboard_page.dart";
 export "/widgets/space.dart";
@@ -64,3 +69,4 @@ export '/services/auth_service.dart';
 // controllers
 export "/controllers/theme_controller.dart";
 export "/controllers/auth_controller.dart";
+export "/controllers/data_controller.dart";

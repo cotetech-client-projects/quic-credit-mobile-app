@@ -181,26 +181,31 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                Card(
-                  elevation: 0,
-                  color: Theme.of(context).primaryColor.withOpacity(0.1),
-                  margin: const EdgeInsets.all(10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    side: BorderSide(
-                      color: Theme.of(context).primaryColor.withOpacity(0.2),
-                      width: 0.5,
+                InkWell(
+                  onTap: () {
+                    Routes.pushPage(Routes.completeProfile);
+                  },
+                  child: Card(
+                    elevation: 0,
+                    color: Theme.of(context).primaryColor.withOpacity(0.1),
+                    margin: const EdgeInsets.all(10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(
+                        color: Theme.of(context).primaryColor.withOpacity(0.2),
+                        width: 0.5,
+                      ),
                     ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Text(
-                      "QuicCredit is operated by QuicCredit Limited and is regulated by the Uganda Microfinance Regulatory Authority.",
-                      style: Theme.of(context).textTheme.bodyMedium!.apply(
-                            color: Theme.of(context).primaryColor,
-                            fontWeightDelta: 3,
-                          ),
-                      maxLines: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Text(
+                        "QuicCredit is operated by QuicCredit Limited and is regulated by the Uganda Microfinance Regulatory Authority.",
+                        style: Theme.of(context).textTheme.bodyMedium!.apply(
+                              color: Theme.of(context).primaryColor,
+                              fontWeightDelta: 3,
+                            ),
+                        maxLines: 2,
+                      ),
                     ),
                   ),
                 )

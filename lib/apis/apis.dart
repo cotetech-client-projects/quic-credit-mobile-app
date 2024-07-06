@@ -8,6 +8,12 @@ class Apis {
   static String resetPassword = "${baseURL}auth/users/reset_password/";
   static String resetPasswordConfirm =
       "${baseURL}auth/users/reset_password_confirm/";
-
   static String logout = "$baseURL/logout";
+  static String completeAuth = "$baseURL/personal-information";
+  static String regions = "$baseURL/regions";
+  static String education = "$baseURL/education-degrees";
+  static String salaryFrequency = "$baseURL/salary-frequencies";
+  static String maritalStatus = "$baseURL/marital-statuses";
+  static String workStatus = "$baseURL/work-statuses";
+  static String relationship = "$baseURL/relationships";
 }

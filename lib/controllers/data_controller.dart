@@ -1,0 +1,81 @@
+import 'package:quic_credit/models/marital_status_model.dart';
+
+import '../exports/exports.dart';
+
+
+class DataController with ChangeNotifier {
+  List<MaritalStatusModel> _maritalStatus = [];
+  List<MaritalStatusModel> get maritalStatus => _maritalStatus;
+  void fetchMaritalStatus() async {
+    AuthService().maritalStatus().then((marital) {
+      _maritalStatus = marital;
+      notifyListeners();
+    });
+  }
+
+  //
+  List<RegionsModel> _regions = [];
+  List<RegionsModel> get regions => _regions;
+  void fetchRegions() async {
+    AuthService().regions().then((value) {
+      _regions = value;
+      notifyListeners();
+    });
+  }
+
+  // relationship
+  List<RelationshipsModel> _relationship = [];
+  List<RelationshipsModel> get relationship => _relationship;
+  void fetchRelationship() async {
+    AuthService().relationship().then((value) {
+      _relationship = value;
+      notifyListeners();
+    });
+  }
+
+  // education
+  List<EducationModel> _education = [];
+  List<EducationModel> get education => _education;
+  void fetchEducation() async {
+    AuthService().education().then((value) {
+      _education = value;
+      notifyListeners();
+    });
+  }
+
+// work status
+  List<WorkStatusModel> _workStatus = [];
+  List<WorkStatusModel> get workStatus => _workStatus;
+  void fetchWorkStatus() async {
+    AuthService().workStatus().then((value) {
+      _workStatus = value;
+      notifyListeners();
+    });
+  }
+
+  // salary frequency
+  List<SalaryFrequencyModel> _salaryFrequency = [];
+  List<SalaryFrequencyModel> get salaryFrequency => _salaryFrequency;
+  void fetchSalaryFrequency() async {
+    AuthService().salaryFrequency().then((value) {
+      _salaryFrequency = value;
+      notifyListeners();
+    });
+  }
+
+  //
+  DataController() {
+    //
+    fetchMaritalStatus();
+    //
+    fetchRegions();
+    //
+    fetchRelationship();
+    //
+    fetchEducation();
+    //
+    fetchWorkStatus();
+    //
+    fetchSalaryFrequency();
+  }
+}

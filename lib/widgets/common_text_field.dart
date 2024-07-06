@@ -55,7 +55,10 @@ class CommonTextField extends StatelessWidget {
                   const EdgeInsets.only(left: 16, right: 16, top: 4, bottom: 4),
               child: Text(
                 titleText ?? "",
-                style: TextStyles(context).getDescriptionStyle(),
+                style: TextStyles(context).getDescriptionStyle().apply(
+                      color: Colors.grey.shade600,
+                      fontWeightDelta: 4,
+                    ),
               ),
             ),
           Card(

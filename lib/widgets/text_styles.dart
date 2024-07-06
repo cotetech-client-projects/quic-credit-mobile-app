@@ -8,7 +8,7 @@ class TextStyles {
   TextStyles(this.context);
 
   TextStyle getTitleStyle() {
-    return GoogleFonts.nunito(
+    return GoogleFonts.poppins(
       fontSize: 24,
       fontWeight: FontWeight.w600,
       color: Theme.of(context).brightness == Brightness.dark
@@ -18,7 +18,7 @@ class TextStyles {
   }
 
   TextStyle getDescriptionStyle() {
-    return GoogleFonts.nunito(
+    return GoogleFonts.poppins(
       fontSize: 14,
       fontWeight: FontWeight.w400,
       color: Theme.of(context).brightness == Brightness.dark
@@ -28,7 +28,7 @@ class TextStyles {
   }
 
   TextStyle getRegularStyle() {
-    return GoogleFonts.nunito(
+    return GoogleFonts.poppins(
       fontSize: 16,
       fontWeight: FontWeight.w400,
       color: Theme.of(context).brightness == Brightness.dark
@@ -38,7 +38,7 @@ class TextStyles {
   }
 
   TextStyle getBoldStyle() {
-    return GoogleFonts.nunito(
+    return GoogleFonts.poppins(
       fontSize: 16,
       fontWeight: FontWeight.bold,
       color: Theme.of(context).brightness == Brightness.dark

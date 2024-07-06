@@ -34,207 +34,192 @@ class _UserProfileState extends State<UserProfile> {
       body: AuthBody(
         child: Form(
           key: formKey,
-          child: ListView(
-            padding: const EdgeInsets.all(15.0),
-            children: [
-              const Space(space: 0.10),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 0, 10, 10),
-                child: Text(
-                  'Add Your Personal Information',
-                  style: Theme.of(context).textTheme.titleLarge!.apply(
-                        color: Theme.of(context).primaryColor,
-                        fontWeightDelta: 4,
-                        fontSizeDelta: 1,
-                      ),
-                ),
-              ),
-              const Space(space: 0.01),
-              // field for email
-              CommonTextField(
-                titleText: "First Name *",
-                keyboardType: TextInputType.name,
-                radius: 10,
-                validate: (value) {
-                  if (value!.isEmpty) {
-                    setState(() {
-                      firstNameError = "Full name is required";
-                    });
-                    return null;
-                  }
-                  return null;
-                },
-                contentPadding: const EdgeInsets.all(10),
-                enableBorder: true,
-                errorText: firstNameError,
-                hintText: "Provide your firstname e.g John",
-                controller: firstNameController,
-              ),
-              const Space(space: 0.010),
-              // field for email
-              CommonTextField(
-                titleText: "Middle Name (Optional)",
-                keyboardType: TextInputType.name,
-                radius: 10,
-                contentPadding: const EdgeInsets.all(10),
-                enableBorder: true,
-                hintText: "Provide your middle name e.g Doe",
-                controller: middleNameController,
-              ),
-              const Space(space: 0.010),
-              // field for email
-              CommonTextField(
-                titleText: "Last Name",
-                keyboardType: TextInputType.name,
-                radius: 10,
-                contentPadding: const EdgeInsets.all(10),
-                enableBorder: true,
-                errorText: lastNameError,
-                hintText: "Provide your last name e.g Matovu",
-                controller: lastNameController,
-                validate: (value) {
-                  if (value!.isEmpty) {
-                    setState(() {
-                      lastNameError = "Last name is required";
-                    });
-                    return null;
-                  }
-                  return null;
-                },
-              ),
-              const Space(space: 0.010),
-              // form for date of birth
-              CommonTextField(
-                titleText: "Email Address*",
-                keyboardType: TextInputType.emailAddress,
-                radius: 10,
-                validate: (value) {
-                  if (value!.isEmpty) {
-                    setState(() {
-                      emailError = "Email is required";
-                    });
-                    return null;
-                  }
-                  return null;
-                },
-                contentPadding: const EdgeInsets.all(10),
-                enableBorder: true,
-                errorText: emailError,
-                hintText: "Provide your email address",
-                controller: emailController,
-              ),
-              const Space(space: 0.010),
-              CommonTextField(
-                controller: dobController,
-                enableBorder: true,
-                suffixIcon: Icons.calendar_today,
-                enableSuffix: true,
-                hintText: "Select your date of birth",
-                contentPadding: const EdgeInsets.all(10),
-                keyboardType: TextInputType.datetime,
-                readOnly: true,
-                onTapSuffix: () async {
-                  var date = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime.now(),
-                  );
-                  if (date != null) {
-                    dobController.text = DateFormat.yMMMd().format(date);
-                  }
-                },
-                validate: (value) {
-                  if (value!.isEmpty) {
-                    setState(() {
-                      dobError = "Date of birth is required";
-                    });
-                    return null;
-                  }
-                  return null;
-                },
-                radius: 10,
-                titleText: "Date Of Birth",
-                errorText: dobError,
-              ),
-              // gender ui
-              const Space(space: 0.010),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 0, 10, 10),
-                child: Text(
-                  "Gender",
-                  style: TextStyles(context).getDescriptionStyle(),
-                ),
-              ),
-              Row(
-                children: [
-                  Flexible(
-                    child: RadioListTile(
-                      value: male,
-                      groupValue: 0,
-                      onChanged: (x) {
-                        setState(() {
-                          female = 1;
-                          male = 0;
-                          genderController.text = "Male";
-                        });
-                      },
-                      title: const Text("Male"),
-                    ),
+          child: Consumer<DataController>(builder: (context, controller, x) {
+            if (mounted) {
+              // controller.fetchEducation();
+              // controller.fetchMaritalStatus();
+              // controller.fetchRegions();
+              // controller.fetchRelationship();
+              // controller.fetchSalaryFrequency();
+              controller.fetchWorkStatus();
+            }
+            return ListView(
+              padding: const EdgeInsets.all(15.0),
+              children: [
+                const Space(space: 0.10),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 10, 10),
+                  child: Text(
+                    'Personal Information',
+                    style: Theme.of(context).textTheme.titleLarge!.apply(
+                          color: Theme.of(context).primaryColor,
+                          fontWeightDelta: 5,
+                          fontSizeDelta: 1,
+                        ),
                   ),
-                  Flexible(
-                    child: RadioListTile(
-                      title: const Text("Female"),
-                      value: female,
-                      groupValue: 0,
-                      onChanged: (x) {
-                        setState(() {
-                          female = 0;
-                          male = 1;
-                          genderController.text = "Female";
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
+                ),
 
-              // field for nin
-              CommonTextField(
-                controller: ninController,
-                enableBorder: true,
-                hintText: "Enter your National ID Number",
-                contentPadding: const EdgeInsets.all(10),
-                validate: (value) {
-                  if (value!.isEmpty) {
-                    setState(() {
-                      dobError = "NIN is required";
-                    });
+                CommonTextField(
+                  controller: dobController,
+                  enableBorder: true,
+                  suffixIcon: Icons.calendar_today,
+                  enableSuffix: true,
+                  hintText: "Select your date of birth",
+                  contentPadding: const EdgeInsets.all(10),
+                  keyboardType: TextInputType.datetime,
+                  readOnly: true,
+                  onTapSuffix: () async {
+                    var date = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime.now(),
+                    );
+                    if (date != null) {
+                      dobController.text = DateFormat.yMMMd().format(date);
+                    }
+                  },
+                  validate: (value) {
+                    if (value!.isEmpty) {
+                      setState(() {
+                        dobError = "Date of birth is required";
+                      });
+                      return null;
+                    }
                     return null;
-                  }
-                  return null;
-                },
-                radius: 10,
-                titleText: "National ID Number (NIN)*",
-                errorText: ninError,
-              ),
-              const Space(space: 0.01),
-              CustomButton(
-                onPress: () {
-                  if (!formKey.currentState!.validate()) {
-                    print("Form is valid");
-                  } else {
-                    Routes.pushPage(Routes.work);
-                  }
-                },
-                buttonColor: Theme.of(context).primaryColor,
-                text: "Submit Profile",
-                buttonRadius: 10,
-                textColor: Colors.white,
-              ),
-              const Space(space: 0.091),
-            ],
-          ),
+                  },
+                  radius: 10,
+                  titleText: "Date Of Birth",
+                  errorText: dobError,
+                ),
+                CommonTextField(
+                  controller: dobController,
+                  enableBorder: true,
+                  suffixIcon: Icons.add,
+                  enableSuffix: true,
+                  hintText: "Select work status",
+                  contentPadding: const EdgeInsets.all(10),
+                  keyboardType: TextInputType.text,
+                  readOnly: true,
+                  onTapSuffix: () async {
+                    showSheet(
+                      data: controller.workStatus
+                          .map((x) => {
+                                "name": x.label,
+                                "id": x.id,
+                              })
+                          .toList(),
+                      selected: (value) {
+                        // dobController.text = value;
+                      },
+                    );
+                  },
+                  validate: (value) {
+                    if (value!.isEmpty) {
+                      setState(() {
+                        dobError = "Date of birth is required";
+                      });
+                      return null;
+                    }
+                    return null;
+                  },
+                  radius: 10,
+                  titleText: "Work Status",
+                  errorText: dobError,
+                ),
+
+                // gender ui
+                const Space(space: 0.010),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                  child: Text(
+                    "Gender",
+                    style: TextStyles(context).getDescriptionStyle().apply(
+                          color: Colors.grey.shade600,
+                          fontWeightDelta: 5,
+                        ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Flexible(
+                      child: RadioListTile(
+                        value: male,
+                        groupValue: 0,
+                        onChanged: (x) {
+                          setState(() {
+                            female = 1;
+                            male = 0;
+                            genderController.text = "Male";
+                          });
+                        },
+                        title: const Text("Male"),
+                      ),
+                    ),
+                    Flexible(
+                      child: RadioListTile(
+                        title: const Text("Female"),
+                        value: female,
+                        groupValue: 0,
+                        onChanged: (x) {
+                          setState(() {
+                            female = 0;
+                            male = 1;
+                            genderController.text = "Female";
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                // field for nin
+                CommonTextField(
+                  controller: ninController,
+                  enableBorder: true,
+                  hintText: "Enter your National ID Number",
+                  contentPadding: const EdgeInsets.all(10),
+                  validate: (value) {
+                    if (value!.isEmpty) {
+                      setState(() {
+                        dobError = "NIN is required";
+                      });
+                      return null;
+                    }
+                    return null;
+                  },
+                  radius: 10,
+                  titleText: "National ID Number (NIN)*",
+                  errorText: ninError,
+                ),
+
+                const Space(
+                  space: 0.02,
+                ),
+                CustomButton(
+                  onPress: () {
+                    if (formKey.currentState!.validate()) {
+                      AuthService().completeAuth({
+                        "nin": ninController.text,
+                        "date_of_birth": dobController.text,
+                        "region_id": 1,
+                        "work_status_id": 1,
+                        "frequency_of_salary_id": 1,
+                        "education_degree_id": 1,
+                        "marital_status_id": 1,
+                        "gender": genderController.text,
+                        "salary_payday": "2024-07-15"
+                      });
+                    }
+                  },
+                  buttonColor: Theme.of(context).primaryColor,
+                  text: "Submit Profile",
+                  buttonRadius: 10,
+                  textColor: Colors.white,
+                ),
+                const Space(space: 0.01),
+              ],
+            );
+          }),
         ),
       ),
     );

@@ -65,8 +65,8 @@ class _FamilyInfoState extends State<FamilyInfo> {
                   enableSuffix: true,
                   suffixIcon: Icons.arrow_drop_down_circle_outlined,
                   onTapSuffix: () => showSheet(
-                    regions,
-                    (value) {
+                    data: regions,
+                    selected: (value) {
                       setState(() {
                         regionController.text = value;
                       });
@@ -121,8 +121,8 @@ class _FamilyInfoState extends State<FamilyInfo> {
                   enableSuffix: true,
                   suffixIcon: Icons.arrow_drop_down_circle_outlined,
                   onTapSuffix: () => showSheet(
-                    martialStatus,
-                    (value) {
+                    data: martialStatus,
+                    selected: (value) {
                       setState(() {
                         maritalStatusController.text = value;
                       });

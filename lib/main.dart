@@ -1,5 +1,6 @@
 import "/exports/exports.dart";
 
+
 // global definition for build context
 var navigatorKey = GlobalKey<NavigatorState>();
 BuildContext context = navigatorKey.currentContext!;
@@ -29,6 +30,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => AuthController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DataController(),
         ),
       ],
       child: Consumer<ThemeController>(builder: (context, controller, co) {
