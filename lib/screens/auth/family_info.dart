@@ -68,7 +68,7 @@ class _FamilyInfoState extends State<FamilyInfo> {
                     data: regions,
                     selected: (value) {
                       setState(() {
-                        regionController.text = value;
+                        regionController.text = value['name'];
                       });
                     },
                   ),
@@ -124,7 +124,7 @@ class _FamilyInfoState extends State<FamilyInfo> {
                     data: martialStatus,
                     selected: (value) {
                       setState(() {
-                        maritalStatusController.text = value;
+                        maritalStatusController.text = value['name'];
                       });
                     },
                   ),

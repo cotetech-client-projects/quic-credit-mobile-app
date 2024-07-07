@@ -12,10 +12,13 @@ class _UserProfileState extends State<UserProfile> {
   // form key
   final formKey = GlobalKey<FormState>();
   // controllers
-  final firstNameController = TextEditingController();
-  final middleNameController = TextEditingController();
-  final lastNameController = TextEditingController();
-  final emailController = TextEditingController();
+  final workStatusController = TextEditingController();
+  int workValue = 0;
+  int salaryFreq = 0;
+  int educationDegreeValue = 0;
+  int maritalStatusValue = 0;
+  int regionValue = 0;
+
   final dobController = TextEditingController();
   final genderController = TextEditingController();
   final ninController = TextEditingController();
@@ -28,6 +31,21 @@ class _UserProfileState extends State<UserProfile> {
   int male = -1;
   int female = -1;
 
+  var regionController = TextEditingController();
+  var salaryFrequencyController = TextEditingController();
+  var educationDegreeController = TextEditingController();
+  var maritalStatusController = TextEditingController();
+  var salaryPayDayController = TextEditingController();
+  @override
+  void initState() {
+    Provider.of<DataController>(context).fetchEducation();
+    Provider.of<DataController>(context).fetchMaritalStatus();
+    Provider.of<DataController>(context).fetchRegions();
+    Provider.of<DataController>(context).fetchSalaryFrequency();
+    Provider.of<DataController>(context).fetchWorkStatus();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,14 +53,7 @@ class _UserProfileState extends State<UserProfile> {
         child: Form(
           key: formKey,
           child: Consumer<DataController>(builder: (context, controller, x) {
-            if (mounted) {
-              // controller.fetchEducation();
-              // controller.fetchMaritalStatus();
-              // controller.fetchRegions();
-              // controller.fetchRelationship();
-              // controller.fetchSalaryFrequency();
-              controller.fetchWorkStatus();
-            }
+            if (mounted) {}
             return ListView(
               padding: const EdgeInsets.all(15.0),
               children: [
@@ -58,7 +69,7 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                   ),
                 ),
-
+                // date of birth
                 CommonTextField(
                   controller: dobController,
                   enableBorder: true,
@@ -92,8 +103,9 @@ class _UserProfileState extends State<UserProfile> {
                   titleText: "Date Of Birth",
                   errorText: dobError,
                 ),
+                //  work status
                 CommonTextField(
-                  controller: dobController,
+                  controller: workStatusController,
                   enableBorder: true,
                   suffixIcon: Icons.add,
                   enableSuffix: true,
@@ -110,16 +122,19 @@ class _UserProfileState extends State<UserProfile> {
                               })
                           .toList(),
                       selected: (value) {
-                        // dobController.text = value;
+                        workStatusController.text = value['name'];
+                        setState(() {
+                          workValue = value['id'];
+                        });
                       },
                     );
                   },
                   validate: (value) {
                     if (value!.isEmpty) {
-                      setState(() {
-                        dobError = "Date of birth is required";
-                      });
-                      return null;
+                      // setState(() {
+                      return "Work status is required";
+                      // });
+                      // return null;
                     }
                     return null;
                   },
@@ -127,7 +142,153 @@ class _UserProfileState extends State<UserProfile> {
                   titleText: "Work Status",
                   errorText: dobError,
                 ),
-
+                // region
+                CommonTextField(
+                  controller: regionController,
+                  enableBorder: true,
+                  suffixIcon: Icons.add,
+                  enableSuffix: true,
+                  hintText: "Select region",
+                  contentPadding: const EdgeInsets.all(10),
+                  keyboardType: TextInputType.text,
+                  readOnly: true,
+                  onTapSuffix: () async {
+                    showSheet(
+                      data: controller.regions
+                          .map((x) => {
+                                "name": x.label,
+                                "id": x.id,
+                              })
+                          .toList(),
+                      selected: (value) {
+                        regionController.text = value['name'];
+                        setState(() {
+                          regionValue = value['id'];
+                        });
+                      },
+                    );
+                  },
+                  validate: (value) {
+                    if (value!.isEmpty) {
+                      // setState(() {
+                      return "Region is required";
+                      // });
+                      // return null;
+                    }
+                    return null;
+                  },
+                  radius: 10,
+                  titleText: "Region",
+                  // errorText: dobError,
+                ),
+                // salary frequency
+                CommonTextField(
+                  controller: salaryFrequencyController,
+                  enableBorder: true,
+                  suffixIcon: Icons.add,
+                  enableSuffix: true,
+                  hintText: "Select salary frequency",
+                  contentPadding: const EdgeInsets.all(10),
+                  keyboardType: TextInputType.text,
+                  readOnly: true,
+                  onTapSuffix: () async {
+                    showSheet(
+                      data: controller.salaryFrequency
+                          .map((x) => {
+                                "name": x.label,
+                                "id": x.id,
+                              })
+                          .toList(),
+                      selected: (value) {
+                        salaryFrequencyController.text = value['name'];
+                        setState(() {
+                          salaryFreq = value['id'];
+                        });
+                      },
+                    );
+                  },
+                  validate: (value) {
+                    if (value!.isEmpty) {
+                      // setState(() {
+                      return "Salary frequency is required";
+                      // });
+                    }
+                    return null;
+                  },
+                  radius: 10,
+                  titleText: "Salary Frequency Status",
+                  errorText: dobError,
+                ),
+                //   education degree
+                CommonTextField(
+                  controller: educationDegreeController,
+                  enableBorder: true,
+                  suffixIcon: Icons.add,
+                  enableSuffix: true,
+                  hintText: "Select education degree",
+                  contentPadding: const EdgeInsets.all(10),
+                  keyboardType: TextInputType.text,
+                  readOnly: true,
+                  onTapSuffix: () async {
+                    showSheet(
+                      data: controller.education
+                          .map((x) => {
+                                "name": x.label,
+                                "id": x.id,
+                              })
+                          .toList(),
+                      selected: (value) {
+                        educationDegreeController.text = value['name'];
+                        setState(() {
+                          educationDegreeValue = value['id'];
+                        });
+                      },
+                    );
+                  },
+                  validate: (value) {
+                    if (value!.isEmpty) {
+                      // setState(() {
+                      return "Education degree is required";
+                      // });
+                    }
+                    return null;
+                  },
+                  radius: 10,
+                  titleText: "Education Degree",
+                  // errorText: dobError,
+                ),
+                // marital status
+                CommonTextField(
+                  controller: maritalStatusController,
+                  enableBorder: true,
+                  suffixIcon: Icons.add,
+                  enableSuffix: true,
+                  hintText: "Select marital status",
+                  contentPadding: const EdgeInsets.all(10),
+                  keyboardType: TextInputType.text,
+                  readOnly: true,
+                  onTapSuffix: () async {
+                    showSheet(
+                      data: controller.maritalStatus
+                          .map((x) => {
+                                "name": x.label,
+                                "id": x.id,
+                              })
+                          .toList(),
+                      selected: (value) {
+                        maritalStatusController.text = value['name'];
+                        setState(() {
+                          maritalStatusValue = value['id'];
+                        });
+                      },
+                    );
+                  },
+                  validate: (value) =>
+                      (value!.isEmpty) ? "Marital status is required" : null,
+                  radius: 10,
+                  titleText: "Marital Status",
+                  // errorText: dobError,
+                ),
                 // gender ui
                 const Space(space: 0.010),
                 Padding(
@@ -181,7 +342,7 @@ class _UserProfileState extends State<UserProfile> {
                   validate: (value) {
                     if (value!.isEmpty) {
                       setState(() {
-                        dobError = "NIN is required";
+                        ninError = "NIN is required";
                       });
                       return null;
                     }
@@ -191,26 +352,76 @@ class _UserProfileState extends State<UserProfile> {
                   titleText: "National ID Number (NIN)*",
                   errorText: ninError,
                 ),
-
+                // salary pay day
+                CommonTextField(
+                  controller: salaryPayDayController,
+                  enableBorder: true,
+                  suffixIcon: Icons.calendar_today,
+                  enableSuffix: true,
+                  hintText: "Select your salary payday",
+                  contentPadding: const EdgeInsets.all(10),
+                  keyboardType: TextInputType.datetime,
+                  readOnly: true,
+                  onTapSuffix: () async {
+                    var date = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2023),
+                      lastDate: DateTime(2030),
+                    );
+                    if (date != null) {
+                      salaryPayDayController.text =
+                          DateFormat.yMMMd().format(date);
+                    }
+                  },
+                  validate: (value) {
+                    if (value!.isEmpty) {
+                      // setState(() {
+                      return "Salary payday is required";
+                      // });
+                      // return null;
+                    }
+                    return null;
+                  },
+                  radius: 10,
+                  titleText: "Salary Payday",
+                  errorText: dobError,
+                ),
                 const Space(
                   space: 0.02,
                 ),
                 CustomButton(
-                  onPress: () {
-                    if (formKey.currentState!.validate()) {
-                      AuthService().completeAuth({
-                        "nin": ninController.text,
-                        "date_of_birth": dobController.text,
-                        "region_id": 1,
-                        "work_status_id": 1,
-                        "frequency_of_salary_id": 1,
-                        "education_degree_id": 1,
-                        "marital_status_id": 1,
-                        "gender": genderController.text,
-                        "salary_payday": "2024-07-15"
-                      });
-                    }
-                  },
+                  loading: controller.loading,
+                  onPress: controller.loading
+                      ? () {}
+                      : () {
+                          controller.loading = true;
+                          if (formKey.currentState!.validate()) {
+                            AuthService().completeAuth({
+                              "nin": ninController.text,
+                              "date_of_birth": dobController.text,
+                              "region_id": regionValue,
+                              "work_status_id": workValue,
+                              "frequency_of_salary_id": salaryFreq,
+                              "education_degree_id": educationDegreeValue,
+                              "marital_status_id": maritalStatusValue,
+                              "gender": genderController.text.toLowerCase(),
+                              "salary_payday": salaryPayDayController.text
+                            }).then((value) {
+                              controller.loading = false;
+                              // routes to the next page
+                              Routes.pushReplace(Routes.familyInfo);
+                            }).onError((error, stackTrace) {
+                              controller.loading = false;
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(error.toString()),
+                              ));
+                            });
+                          } else {
+                            controller.loading = false;
+                          }
+                        },
                   buttonColor: Theme.of(context).primaryColor,
                   text: "Submit Profile",
                   buttonRadius: 10,

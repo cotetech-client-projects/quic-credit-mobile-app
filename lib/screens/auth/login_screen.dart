@@ -1,5 +1,4 @@
 import 'package:flutter/gestures.dart';
-import '/services/auth_service.dart';
 import '/exports/exports.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -116,10 +115,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           Routes.replacePage(
                             const IndexHome(),
                           );
-                        }).onError((error, stackTrace) {
+                        }).catchError((error) {
                           showMessage(
                             error.toString(),
-                            color: Colors.red,
                           );
                           auth.authLoading = false;
                         });

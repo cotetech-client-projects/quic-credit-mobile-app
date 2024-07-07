@@ -21,10 +21,11 @@ class AuthService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         String? result = await response.stream.bytesToString();
         StorageService().setData("user", result);
-        print(result);
+        // record session
+        SessionService().storeToken(json.decode(result)['access_token']);
         return json.decode(result)['message'];
       } else {
-        Future.error(response.reasonPhrase ?? "");
+        Future.error("Invalid Details");
       }
     } catch (e) {
       return Future.error(e.toString());
@@ -118,9 +119,12 @@ class AuthService {
       StreamedResponse response = await request.send();
       if (response.statusCode == 200 || response.statusCode == 201) {
         String? res = (await response.stream.bytesToString());
-        return Future.value(json.decode(res)['message']);
+        return (json.decode(res)['message']);
       } else {
-        return Future.error(response.reasonPhrase ?? "");
+        Client().close();
+        log(request.body);
+        print(await response.stream.bytesToString());
+        return Future.error("Invalid inputs provided");
       }
     } catch (e) {
       return Future.error("We are unable to connect our servers currently.");
@@ -154,7 +158,8 @@ class AuthService {
     try {
       var headers = {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${authenticatedUser.user?.accessToken}'
       };
       var request = Request('GET', Uri.parse(Apis.education));
       request.headers.addAll(headers);
@@ -213,7 +218,7 @@ class AuthService {
       );
       request.headers.addAll(headers);
       StreamedResponse response = await request.send();
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         String res = await response.stream.bytesToString();
         return maritalStatusModelFromJson(res);
       } else {
@@ -232,7 +237,7 @@ class AuthService {
         'Accept': 'application/json',
         'Authorization': 'Bearer ${authenticatedUser.user?.accessToken}'
       };
-      print(headers);
+      // print(headers);
       var request = Request(
         'GET',
         Uri.parse(
@@ -243,6 +248,7 @@ class AuthService {
       StreamedResponse response = await request.send();
       if (response.statusCode == 200 || response.statusCode == 201) {
         String res = await response.stream.bytesToString();
+        Client().close();
         return workStatusModelFromJson(res);
       } else {
         return Future.error(response.reasonPhrase ?? "");
@@ -270,8 +276,10 @@ class AuthService {
       StreamedResponse response = await request.send();
       if (response.statusCode == 200 || response.statusCode == 201) {
         String res = await response.stream.bytesToString();
+        Client().close();
         return relationshipsModelFromJson(res);
       } else {
+        Client().close();
         return Future.error(response.reasonPhrase ?? "");
       }
     } catch (e) {

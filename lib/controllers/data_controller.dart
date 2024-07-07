@@ -2,8 +2,15 @@ import 'package:quic_credit/models/marital_status_model.dart';
 
 import '../exports/exports.dart';
 
-
 class DataController with ChangeNotifier {
+  // loader
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    _loading = value;
+    notifyListeners();
+  }
+
   List<MaritalStatusModel> _maritalStatus = [];
   List<MaritalStatusModel> get maritalStatus => _maritalStatus;
   void fetchMaritalStatus() async {
@@ -36,7 +43,7 @@ class DataController with ChangeNotifier {
   // education
   List<EducationModel> _education = [];
   List<EducationModel> get education => _education;
-  void fetchEducation() async {
+  void fetchEducation() {
     AuthService().education().then((value) {
       _education = value;
       notifyListeners();
@@ -46,7 +53,7 @@ class DataController with ChangeNotifier {
 // work status
   List<WorkStatusModel> _workStatus = [];
   List<WorkStatusModel> get workStatus => _workStatus;
-  void fetchWorkStatus() async {
+  void fetchWorkStatus() {
     AuthService().workStatus().then((value) {
       _workStatus = value;
       notifyListeners();

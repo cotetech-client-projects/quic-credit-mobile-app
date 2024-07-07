@@ -2,7 +2,8 @@ import '/exports/exports.dart';
 
 // global model bottom sheet
 void showSheet(
-    {List<Map<String, dynamic>>? data, ValueChanged<String>? selected}) {
+    {List<Map<String, dynamic>>? data,
+    ValueChanged<Map<String, dynamic>>? selected}) {
   showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -15,7 +16,7 @@ void showSheet(
                     return ListTile(
                       title: Text(data[index]['name']),
                       onTap: () {
-                        selected!(data[index]['id'].toString());
+                        selected!(data[index]);
                         Routes.popPage();
                       },
                     );

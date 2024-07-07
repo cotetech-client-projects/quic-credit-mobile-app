@@ -11,6 +11,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    AuthenticatedUser().getUser();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
