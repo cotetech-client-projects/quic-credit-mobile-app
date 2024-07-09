@@ -10,17 +10,20 @@ void showSheet(
         return BottomSheet(
             onClosing: () {},
             builder: (context) {
-              return ListView.builder(
-                  itemCount: data!.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(data[index]['name']),
-                      onTap: () {
-                        selected!(data[index]);
-                        Routes.popPage();
-                      },
-                    );
-                  });
+              return ListView.separated(
+                itemCount: data!.length,
+                padding: const EdgeInsets.all(15),
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(data[index]['name']),
+                    onTap: () {
+                      selected!(data[index]);
+                      Routes.popPage();
+                    },
+                  );
+                },
+                separatorBuilder: (context, index) => const Divider(),
+              );
             });
       });
 }

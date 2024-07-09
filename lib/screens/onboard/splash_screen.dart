@@ -26,19 +26,19 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _animationController.repeat(reverse: true);
     Future.delayed(const Duration(seconds: 3), () async {
-      String? tokenInvalid = await SessionService().getToken();
+      // String? tokenInvalid = await SessionService().getToken();
       // check if user is first time user
       StorageService().getData('firstTimeUser').then((value) {
         if (value == null) {
           StorageService().setData('firstTimeUser', true);
           Routes.pushReplace(Routes.onboard);
         } else {
-          if (tokenInvalid!.isEmpty) {
-            Routes.pushReplace(Routes.login);
-          } else {
-            // route to auth index
-            Routes.pushReplace(Routes.home);
-          }
+          // if (tokenInvalid!.isEmpty) {
+          Routes.pushReplace(Routes.login);
+          // } else {
+          //   // route to auth index
+          //   Routes.pushReplace(Routes.home);
+          // }
         }
       });
     });

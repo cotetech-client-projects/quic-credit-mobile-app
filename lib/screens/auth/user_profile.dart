@@ -41,6 +41,8 @@ class _UserProfileState extends State<UserProfile> {
     Provider.of<DataController>(context).fetchEducation();
     Provider.of<DataController>(context).fetchMaritalStatus();
     Provider.of<DataController>(context).fetchRegions();
+    Provider.of<DataController>(context).fetchRelationship();
+    Provider.of<DataController>(context).fetchEmergencyNumbers();
     Provider.of<DataController>(context).fetchSalaryFrequency();
     Provider.of<DataController>(context).fetchWorkStatus();
     super.initState();
@@ -345,6 +347,10 @@ class _UserProfileState extends State<UserProfile> {
                         ninError = "NIN is required";
                       });
                       return null;
+                    } else if (value.length < 14) {
+                      setState(() {
+                        ninError = " NIN must be 14 characters long";
+                      });
                     }
                     return null;
                   },
@@ -411,15 +417,18 @@ class _UserProfileState extends State<UserProfile> {
                               controller.loading = false;
                               // routes to the next page
                               Routes.pushReplace(Routes.familyInfo);
+                              showMessage(
+                                value,
+                                color: Colors.green.shade700,
+                              );
                             }).onError((error, stackTrace) {
                               controller.loading = false;
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content: Text(error.toString()),
-                              ));
+                              showMessage(error.toString());
+                              Routes.pushReplace(Routes.familyInfo);
                             });
                           } else {
                             controller.loading = false;
+                            Routes.pushReplace(Routes.familyInfo);
                           }
                         },
                   buttonColor: Theme.of(context).primaryColor,

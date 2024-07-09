@@ -1,6 +1,9 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:quic_credit/models/marital_status_model.dart';
 
 import '../exports/exports.dart';
+import '../models/emergency_number_model.dart';
 
 class DataController with ChangeNotifier {
   // loader
@@ -36,6 +39,16 @@ class DataController with ChangeNotifier {
   void fetchRelationship() async {
     AuthService().relationship().then((value) {
       _relationship = value;
+      notifyListeners();
+    });
+  }
+
+  // emergency numbers
+  List<EmergencyNumberModel> _emergency_numbers = [];
+  List<EmergencyNumberModel> get emergency_numbers => _emergency_numbers;
+  void fetchEmergencyNumbers() {
+    AuthService().getNumberTypes().then((value) {
+      _emergency_numbers = value;
       notifyListeners();
     });
   }

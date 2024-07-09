@@ -16,4 +16,7 @@ class Apis {
   static String maritalStatus = "$baseURL/marital-statuses";
   static String workStatus = "$baseURL/work-statuses";
   static String relationship = "$baseURL/relationships";
+  static String emergencyContacts = "$baseURL/emergency-contacts";
+
+  static String emergencyNumberTypes = "$baseURL/emergency-numbers";
 }

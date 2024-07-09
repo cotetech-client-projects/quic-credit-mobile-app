@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/foundation.dart';
+
+import '../models/emergency_number_model.dart';
 import '/models/marital_status_model.dart';
 import '/exports/exports.dart';
 
@@ -118,16 +121,89 @@ class AuthService {
       request.headers.addAll(headers);
       StreamedResponse response = await request.send();
       if (response.statusCode == 200 || response.statusCode == 201) {
-        String? res = (await response.stream.bytesToString());
-        return (json.decode(res)['message']);
+        // String? res = (await response.stream.bytesToString());
+        return Future.value("User profile added successfully");
       } else {
         Client().close();
-        log(request.body);
-        print(await response.stream.bytesToString());
-        return Future.error("Invalid inputs provided");
+        log(response.statusCode.toString());
+        String d = await response.stream.bytesToString();
+        var res = json.decode(d);
+
+        return d.contains('error')
+            ? Future.error(res['error'])
+            : Future.error("Invalid inputs provided");
       }
-    } catch (e) {
+    } on Exception catch (e, trace) {
+      print(trace.toString());
+      log(e.toString());
       return Future.error("We are unable to connect our servers currently.");
+    }
+  }
+
+// attach emergency contacts
+  Future<String> emergencyContacts(Map<String, dynamic> data) async {
+    try {
+      var headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${authenticatedUser.user?.accessToken}'
+      };
+      var request = Request('POST', Uri.parse(Apis.emergencyContacts));
+      request.body = json.encode({
+        "user_id": authenticatedUser.user?.user.id,
+        ...data,
+      });
+      request.headers.addAll(headers);
+      StreamedResponse response = await request.send();
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // String? res = (await response.stream.bytesToString());
+        return Future.value("Emergency contacts added successfully");
+      } else {
+        Client().close();
+        log(response.statusCode.toString());
+        String d = await response.stream.bytesToString();
+        var res = json.decode(d);
+
+        return d.contains('error')
+            ? Future.error(res['error'])
+            : Future.error("Invalid inputs provided");
+      }
+    } on Exception catch (e, trace) {
+      print(trace.toString());
+      log(e.toString());
+      return Future.error("We are unable to connect our servers currently.");
+    }
+  }
+
+// number types
+  Future<List<EmergencyNumberModel>> getNumberTypes() async {
+    try {
+      var headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${authenticatedUser.user?.accessToken}'
+      };
+      var request = Request(
+        'GET',
+        Uri.parse(
+          Apis.emergencyNumberTypes,
+        ),
+      );
+      request.headers.addAll(headers);
+      StreamedResponse response = await request.send();
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        Client().close();
+        return emergencyNumberModelFromJson(
+            await response.stream.bytesToString());
+      } else {
+        Client().close();
+        return Future.error(response.reasonPhrase ?? "");
+      }
+    } on Exception catch (e, stack) {
+      if (kDebugMode) {
+        print(stack);
+      }
+      return Future.error(e.toString());
     }
   }
 

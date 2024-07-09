@@ -63,7 +63,10 @@ class CommonTextField extends StatelessWidget {
             ),
           Card(
             elevation: 0,
-            color: fieldColor ?? Colors.grey.shade100,
+            color: fieldColor ??
+                (Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black26
+                    : Colors.grey.shade100),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius ?? 24),
               side: enableBorder

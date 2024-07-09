@@ -41,3 +41,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# atsk_6b8df504c9201aa1dc7b4482b41b4d388e1ece10b85d05814d0abde4f27cc772417c1b04

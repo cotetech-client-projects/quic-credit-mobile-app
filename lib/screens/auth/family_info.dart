@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '/screens/auth/widgets/emergency_contact.dart';
 import '/exports/exports.dart';
 
@@ -12,135 +14,83 @@ class _FamilyInfoState extends State<FamilyInfo> {
   // form key
   final formKey = GlobalKey<FormState>();
   // list for ugandan regions
-  List<Map<String, dynamic>> regions = [
-    {"name": "Central Region"},
-    {"name": "Eastern"},
-    {"name": "Northern"},
-    {"name": "Western"},
-  ];
-  // list for martial status
-  List<Map<String, dynamic>> martialStatus = [
-    {"name": "Single"},
-    {"name": "Married"},
-    {"name": "Divorced"},
-    {"name": "Widowed"},
-  ];
+  // List<TextEditingController> controllers = [
+  //   TextEditingController(),
+  //   TextEditingController(),
+  //   TextEditingController(),
+  //   TextEditingController(),
+  // ];
+  List<EmergencyContactData> emergencyContactsData = [];
+  var store = <dynamic>{};
+  List<List<TextEditingController>> data = [];
   int emergencyContacts = 1;
-  // controllers
-  final regionController = TextEditingController();
-  final cityController = TextEditingController();
-  final maritalStatusController = TextEditingController();
-  // errors
-  String regionError = "";
-  String cityError = "";
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<DataController>(context).fetchRelationship();
+    Provider.of<DataController>(context).fetchEmergencyNumbers();
+  }
+
+  void addEmergencyContactData(EmergencyContactData data) {
+    setState(() {
+      emergencyContactsData.add(data);
+    });
+  }
+
+  void updateEmergencyContactData(int index, EmergencyContactData data) {
+    setState(() {
+      emergencyContactsData[index] = data;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AuthBody(
-        child: Consumer(builder: (context, controller, c) {
-          return Form(
-            key: formKey,
-            child: ListView(
+      appBar: AppBar(
+        title: const Text("Family Information"),
+      ),
+      body: Consumer(builder: (context, controller, c) {
+        return Form(
+          key: formKey,
+          child: Consumer<AuthController>(builder: (context, controller, x) {
+            return ListView(
               padding: const EdgeInsets.all(15.0),
               addAutomaticKeepAlives: true,
               children: [
-                const Space(space: 0.10),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 0, 10, 10),
                   child: Text(
-                    'Add Your Family Information',
-                    style: Theme.of(context).textTheme.titleLarge!.apply(
+                    'Add Emergency contacts',
+                    style: Theme.of(context).textTheme.titleMedium!.apply(
                           color: Theme.of(context).primaryColor,
                           fontWeightDelta: 4,
                           fontSizeDelta: 1,
                         ),
                   ),
                 ),
-                const Space(space: 0.01),
-                // field for email
-                CommonTextField(
-                  titleText: "Region *",
-                  hintText: "Select your region",
-                  readOnly: true,
-                  enableSuffix: true,
-                  suffixIcon: Icons.arrow_drop_down_circle_outlined,
-                  onTapSuffix: () => showSheet(
-                    data: regions,
-                    selected: (value) {
-                      setState(() {
-                        regionController.text = value['name'];
-                      });
-                    },
-                  ),
-                  contentPadding: const EdgeInsets.all(10),
-                  keyboardType: TextInputType.name,
-                  radius: 10,
-                  errorText: "",
-                  enableBorder: true,
-                  controller: regionController,
-                  validate: (value) {
-                    if (value!.isEmpty) {
-                      setState(() {
-                        regionError = "Region is required";
-                      });
-                      return null;
-                    }
-                    return null;
-                  },
+                Text(
+                  '(Atleast two contacts)',
+                  style: Theme.of(context).textTheme.bodyMedium!.apply(
+                        color: Colors.red,
+                        fontWeightDelta: 2,
+                      ),
                 ),
-                const Space(space: 0.01),
                 // field for email
-                CommonTextField(
-                  titleText: "City *",
-                  hintText: "City name here...",
-                  contentPadding: const EdgeInsets.all(10),
-                  keyboardType: TextInputType.name,
-                  radius: 10,
-                  errorText: "",
-                  enableBorder: true,
-                  controller: cityController,
-                  validate: (value) {
-                    if (value!.isEmpty) {
-                      setState(() {
-                        cityError = "City is required";
-                      });
-                      return null;
-                    }
-                    return null;
-                  },
-                ),
-                const Space(space: 0.01),
-                // field for email
-                CommonTextField(
-                  titleText: "Marital Status *",
-                  hintText: "Your status...",
-                  contentPadding: const EdgeInsets.all(10),
-                  keyboardType: TextInputType.name,
-                  radius: 10,
-                  readOnly: true,
-                  enableSuffix: true,
-                  suffixIcon: Icons.arrow_drop_down_circle_outlined,
-                  onTapSuffix: () => showSheet(
-                    data: martialStatus,
-                    selected: (value) {
-                      setState(() {
-                        maritalStatusController.text = value['name'];
-                      });
-                    },
-                  ),
-                  errorText: "",
-                  enableBorder: true,
-                  controller: maritalStatusController,
-                  validate: (value) {
-                    return null;
-                  },
-                ),
                 const Space(space: 0.04),
                 ...List.generate(
                   emergencyContacts,
-                  (index) => EmergencyContact(
-                    id: index + 1,
-                  ),
+                  (index) {
+                    return EmergencyContact(
+                      id: index + 1,
+                      onSave: (data) {
+                        if (index < emergencyContactsData.length) {
+                          updateEmergencyContactData(index, data);
+                        } else {
+                          addEmergencyContactData(data);
+                        }
+                      },
+                    );
+                  },
                 ),
                 const Space(space: 0.01),
                 Row(
@@ -167,7 +117,14 @@ class _FamilyInfoState extends State<FamilyInfo> {
                 CustomButton(
                   onPress: () {
                     if (formKey.currentState!.validate()) {
-                      Routes.pushPage(Routes.home);
+                      for (var contactData in emergencyContactsData) {
+                        log('Name: ${contactData.name}');
+                        log('Relationship: ${contactData.relationship}');
+                        log('Phone: ${contactData.phone}');
+                        log('Emergency contact: ${contactData.emergency_number}');
+                        log('---');
+                      }
+                      // TODO: Process the collected data (e.g., send to server)
                     }
                   },
                   buttonColor: Theme.of(context).primaryColor,
@@ -177,10 +134,10 @@ class _FamilyInfoState extends State<FamilyInfo> {
                 ),
                 const Space(space: 0.051),
               ],
-            ),
-          );
-        }),
-      ),
+            );
+          }),
+        );
+      }),
     );
   }
 }
