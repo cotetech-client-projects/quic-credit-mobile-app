@@ -41,7 +41,13 @@ class _FamilyInfoState extends State<FamilyInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Family Information"),
+        title: Text(
+          "Family Information",
+          style: Theme.of(context).textTheme.titleLarge!.apply(
+                fontWeightDelta: 5,
+                fontSizeDelta: 1,
+              ),
+        ),
       ),
       body: Consumer<AuthController>(builder: (context, controller, c) {
         return Form(
@@ -56,8 +62,8 @@ class _FamilyInfoState extends State<FamilyInfo> {
                   child: Text(
                     'Add Emergency contacts',
                     style: Theme.of(context).textTheme.titleMedium!.apply(
-                          color: Theme.of(context).primaryColor,
-                          fontWeightDelta: 4,
+                          // color: Theme.of(context).primaryColor,
+                          fontWeightDelta: 2,
                           fontSizeDelta: 1,
                         ),
                   ),
@@ -66,11 +72,11 @@ class _FamilyInfoState extends State<FamilyInfo> {
                   '(Atleast two contacts)',
                   style: Theme.of(context).textTheme.bodyMedium!.apply(
                         color: Colors.red,
-                        fontWeightDelta: 2,
+                        fontWeightDelta: 1,
                       ),
                 ),
                 // field for email
-                const Space(space: 0.04),
+                const Space(space: 0.014),
                 ...List.generate(
                   emergencyContacts,
                   (index) {

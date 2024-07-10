@@ -20,6 +20,18 @@ class _ApplyLoanState extends State<ApplyLoan> {
   int loanTerm = 0;
   int loanMode = 0;
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AuthService().checkProfile().then((v) {
+        if (v == false) {
+          Routes.pushReplace(Routes.completeProfile);
+        }
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.indigo.shade50,
@@ -43,9 +55,7 @@ class _ApplyLoanState extends State<ApplyLoan> {
                 );
               }
               if (snapshot.hasData) {
-                if (snapshot.data != null && snapshot.data == false) {
-                  Routes.pushPage(Routes.completeProfile);
-                }
+                if (snapshot.data != null && snapshot.data == false) {}
               }
               return Consumer<LoanController>(
                   builder: (context, controller, x) {

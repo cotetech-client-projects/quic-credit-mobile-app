@@ -56,15 +56,15 @@ class AuthService {
         String? result = await response.stream.bytesToString();
         return json.decode(result)['message'];
       } else {
-        Future.error(response.reasonPhrase ?? "");
+        print(await response.stream.bytesToString());
+        return Future.error(response.reasonPhrase ?? "");
       }
     } catch (e) {
       return Future.error(
         e.toString(),
       );
     }
-    throw Exception(
-        'Unexpected error occurred.'); // Add a throw statement at the end of the try block
+    // / Add a throw statement at the end of the try block
   }
 
   // logout function
@@ -363,7 +363,7 @@ class AuthService {
     }
   }
 
-// check existance of user profile
+// check existence of user profile
   Future<bool> checkProfile() async {
     try {
       var headers = {

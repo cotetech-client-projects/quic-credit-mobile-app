@@ -82,7 +82,7 @@ class DataController with ChangeNotifier {
       notifyListeners();
     });
   }
-  // 
+  //
 
   //
   DataController() {

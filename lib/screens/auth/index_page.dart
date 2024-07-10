@@ -79,7 +79,7 @@ class _IndexAuthPageState extends State<IndexAuthPage> {
                         child: CustomButton(
                           buttonColor: Theme.of(context).primaryColor,
                           textColor: Colors.white,
-                          onPress: () => Routes.pushPage(Routes.login),
+                          onPress: () => Routes.pushReplace(Routes.login),
                           text: "Login",
                         ),
                       ),

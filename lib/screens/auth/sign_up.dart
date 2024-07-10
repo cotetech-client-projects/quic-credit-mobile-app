@@ -111,6 +111,7 @@ class _SignUpState extends State<SignUp> {
                       if (formKey.currentState!.validate()) {
                         auth.authLoading = true;
                         if (passwordController.text != confirmController.text) {
+                          auth.authLoading = false;
                           showMessage(
                             "Passwords do not match",
                             color: Colors.red,
