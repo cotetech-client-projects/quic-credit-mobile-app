@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import '/screens/auth/widgets/emergency_contact.dart';
 import '/exports/exports.dart';
@@ -13,13 +13,7 @@ class FamilyInfo extends StatefulWidget {
 class _FamilyInfoState extends State<FamilyInfo> {
   // form key
   final formKey = GlobalKey<FormState>();
-  // list for ugandan regions
-  // List<TextEditingController> controllers = [
-  //   TextEditingController(),
-  //   TextEditingController(),
-  //   TextEditingController(),
-  //   TextEditingController(),
-  // ];
+
   List<EmergencyContactData> emergencyContactsData = [];
   var store = <dynamic>{};
   List<List<TextEditingController>> data = [];
@@ -49,7 +43,7 @@ class _FamilyInfoState extends State<FamilyInfo> {
       appBar: AppBar(
         title: const Text("Family Information"),
       ),
-      body: Consumer(builder: (context, controller, c) {
+      body: Consumer<AuthController>(builder: (context, controller, c) {
         return Form(
           key: formKey,
           child: Consumer<AuthController>(builder: (context, controller, x) {
@@ -115,18 +109,39 @@ class _FamilyInfoState extends State<FamilyInfo> {
                 ),
                 const Space(space: 0.01),
                 CustomButton(
-                  onPress: () {
-                    if (formKey.currentState!.validate()) {
-                      for (var contactData in emergencyContactsData) {
-                        log('Name: ${contactData.name}');
-                        log('Relationship: ${contactData.relationship}');
-                        log('Phone: ${contactData.phone}');
-                        log('Emergency contact: ${contactData.emergency_number}');
-                        log('---');
-                      }
-                      // TODO: Process the collected data (e.g., send to server)
-                    }
-                  },
+                  loading: controller.authLoading,
+                  onPress: controller.authLoading
+                      ? () {}
+                      : () {
+                          if (formKey.currentState!.validate()) {
+                            controller.authLoading = true;
+                            for (var contactData in emergencyContactsData) {
+                              AuthService().emergencyContacts({
+                                // 'user_id':'${authenticatedUser.user?.user.id}',
+                                'name': contactData.name,
+                                'relationship_id': contactData.relationship,
+                                'contact': contactData.phone,
+                                'emergency_number_id': 1,
+                              }).then((res) {
+                                controller.authLoading = false;
+                                showMessage(
+                                  "Emergency contacts added successfully",
+                                  color: Colors.green.shade600,
+                                );
+                                Routes.pushReplace(Routes.home);
+                              }).catchError((error) {
+                                controller.authLoading = false;
+                                showMessage(
+                                  "Failed to add emergency contacts",
+                                  color: Colors.red.shade600,
+                                );
+                              });
+                            }
+                            // TODO: Process the collected data (e.g., send to server)
+                          } else {
+                            controller.authLoading = false;
+                          }
+                        },
                   buttonColor: Theme.of(context).primaryColor,
                   text: "Submit Changes ",
                   buttonRadius: 10,

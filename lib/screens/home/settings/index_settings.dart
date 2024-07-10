@@ -1,4 +1,3 @@
-import '/screens/home/notifications/notifications_page.dart';
 import '/screens/home/settings/theme_widget.dart';
 
 import '/exports/exports.dart';

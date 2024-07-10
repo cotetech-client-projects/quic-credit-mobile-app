@@ -18,22 +18,22 @@ class TextStyles {
   }
 
   TextStyle getDescriptionStyle() {
-    return GoogleFonts.poppins(
+    return GoogleFonts.varelaRound(
       fontSize: 14,
       fontWeight: FontWeight.w400,
       color: Theme.of(context).brightness == Brightness.dark
-          ? Colors.grey[300]
+          ? Colors.grey.shade400
           : Colors.black54,
     );
   }
 
   TextStyle getRegularStyle() {
-    return GoogleFonts.poppins(
+    return GoogleFonts.varelaRound(
       fontSize: 16,
       fontWeight: FontWeight.w400,
       color: Theme.of(context).brightness == Brightness.dark
           ? Colors.white
-          : Colors.blueAccent[900],
+          : Colors.blueAccent.shade700,
     );
   }
 

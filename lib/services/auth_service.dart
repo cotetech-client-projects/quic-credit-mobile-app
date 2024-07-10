@@ -160,7 +160,7 @@ class AuthService {
         return Future.value("Emergency contacts added successfully");
       } else {
         Client().close();
-        log(response.statusCode.toString());
+        log(await response.stream.bytesToString());
         String d = await response.stream.bytesToString();
         var res = json.decode(d);
 
@@ -360,6 +360,29 @@ class AuthService {
       }
     } catch (e) {
       return Future.error(e.toString());
+    }
+  }
+
+// check existance of user profile
+  Future<bool> checkProfile() async {
+    try {
+      var headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${authenticatedUser.user?.accessToken}'
+      };
+      var request = Request('GET',
+          Uri.parse("${Apis.userProfile}${authenticatedUser.user?.user.id}"));
+
+      request.headers.addAll(headers);
+      StreamedResponse response = await request.send();
+      if (response.statusCode == 200) {
+        return Future.value(true);
+      } else {
+        return Future.value(false);
+      }
+    } catch (e) {
+      return Future.value(false);
     }
   }
 }

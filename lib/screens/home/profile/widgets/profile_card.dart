@@ -18,16 +18,16 @@ class ProfileCard extends StatelessWidget {
               : Colors.white30,
         ),
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Theme.of(context).brightness == Brightness.light
-                ? Colors.grey.shade200
-                : Colors.white30,
-            blurRadius: .2,
-            spreadRadius: 0.15,
-            offset: const Offset(0.2, 1.3),
-          )
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Theme.of(context).brightness == Brightness.light
+        //         ? Colors.grey.shade200
+        //         : Colors.white30,
+        //     blurRadius: .2,
+        //     spreadRadius: 0.15,
+        //     offset: const Offset(0.2, 1.3),
+        //   )
+        // ],
       ),
       child: ListTile(
         title: Text(text),

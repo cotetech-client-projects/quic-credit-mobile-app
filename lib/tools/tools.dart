@@ -6,6 +6,8 @@ void showSheet(
     ValueChanged<Map<String, dynamic>>? selected}) {
   showModalBottomSheet(
       context: context,
+      enableDrag: true,
+      showDragHandle: true,
       builder: (context) {
         return BottomSheet(
             onClosing: () {},
@@ -43,16 +45,19 @@ void showLoadingDialog({String? text}) {
       builder: (context) {
         return SimpleDialog(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  text ?? "Loading...",
-                ),
-                const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    text ?? "Loading...",
+                  ),
+                  const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+                ],
+              ),
             )
           ],
         );

@@ -101,47 +101,48 @@ class _EmergencyContactState extends State<EmergencyContact> {
               return null;
             },
           ),
-          CommonTextField(
-            titleText: "Emergency Contact Type",
-            hintText: "Emergency Contact Type here...",
-            contentPadding: const EdgeInsets.all(10),
-            keyboardType: TextInputType.text,
-            radius: 10,
-            errorText: numberError,
-            enableBorder: true,
-            controller: numberController,
-            readOnly: true,
-            suffixIcon: Icons.add,
-            enableSuffix: true,
-            onTapSuffix: () {
-              showSheet(
-                  data: controller.emergency_numbers
-                      .map((e) => {
-                            "id": e.id,
-                            "name": e.description,
-                          })
-                      .toList(),
-                  selected: (value) {
-                    setState(() {
-                      numberController.text = value['name'];
-                      numberValue = value['id'].toString();
-                      widget.onSave(EmergencyContactData(
-                        name: nameController.text,
-                        relationship: relationShipValue,
-                        phone: phoneController.text,
-                        emergency_number: numberValue,
-                      ));
-                      log("number value: $numberValue");
-                    });
-                  });
-            },
-            validate: (value) {
-              setState(() {
-                numberError = value!.isEmpty ? "This field is required" : "";
-              });
-              return null;
-            },
-          ),
+          // CommonTextField(
+          //   titleText: "Emergency Contact Type",
+          //   hintText: "Emergency Contact Type here...",
+          //   contentPadding: const EdgeInsets.all(10),
+          //   keyboardType: TextInputType.text,
+          //   radius: 10,
+          //   errorText: numberError,
+          //   enableBorder: true,
+          //   controller: numberController,
+          //   readOnly: true,
+          //   suffixIcon: Icons.add,
+          //   enableSuffix: true,
+          //   onTapSuffix: () {
+          //     showSheet(
+          //         data: controller.emergency_numbers
+          //             .map((e) => {
+          //                   "id": e.id,
+          //                   "name": e.description,
+          //                 })
+          //             .toList(),
+          //         selected: (value) {
+          //           setState(() {
+          //             numberController.text = value['name'];
+          //             numberValue = value['id'].toString();
+          //             widget.onSave(EmergencyContactData(
+          //               name: nameController.text,
+          //               relationship: relationShipValue,
+          //               phone: phoneController.text,
+          //               emergency_number: numberValue,
+          //             ));
+          //             log("number value: $numberValue");
+          //           });
+          //         });
+          //   },
+          //   validate: (value) {
+          //     setState(() {
+          //       numberError = value!.isEmpty ? "This field is required" : "";
+          //     });
+          //     return null;
+          //   },
+          // ),
+
           const Space(space: 0.01),
           // field for email
           CommonTextField(

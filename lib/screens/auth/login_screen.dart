@@ -27,11 +27,25 @@ class _LoginScreenState extends State<LoginScreen> {
             key: formKey,
             child: Consumer<AuthController>(builder: (context, auth, x) {
               return ListView(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.fromLTRB(20, 5, 20, 10.0),
                 children: [
-                  const Space(
-                    space: 0.0,
+                  Row(
+                    children: [
+                      const CircleAvatar(
+                        radius: 22,
+                        backgroundImage: AssetImage("assets/pngs/new_logo.png"),
+                      ),
+                      const SizedBox(
+                        width: 3,
+                      ),
+                      Text("uicCredit",
+                          style: Theme.of(context).textTheme.titleLarge!.apply(
+                                // color: Theme.of(context).primaryColor,
+                                fontWeightDelta: 4,
+                              ))
+                    ],
                   ),
+                  const Space(space: 0.041),
                   SvgPicture.asset(
                     "assets/svgs/login.svg",
                     fit: BoxFit.cover,
@@ -42,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       'Login',
                       style: Theme.of(context).textTheme.headlineLarge!.apply(
-                            color: Theme.of(context).primaryColor,
+                            // color: Theme.of(context).primaryColor,
                             fontWeightDelta: 4,
                             fontSizeDelta: 10,
                           ),

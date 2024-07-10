@@ -20,7 +20,7 @@ class CommonTextField extends StatelessWidget {
   final VoidCallback? onTapSuffix;
   final String? Function(String?)? validate;
   const CommonTextField({
-    Key? key,
+    super.key,
     this.hintText = '',
     this.radius,
     this.isObscureText = false,
@@ -40,7 +40,7 @@ class CommonTextField extends StatelessWidget {
     this.icon,
     this.contentPadding,
     this.readOnly = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

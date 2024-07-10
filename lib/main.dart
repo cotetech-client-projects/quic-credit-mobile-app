@@ -1,5 +1,5 @@
 import "/exports/exports.dart";
-
+import "controllers/loan_controller.dart";
 
 // global definition for build context
 var navigatorKey = GlobalKey<NavigatorState>();
@@ -33,6 +33,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => DataController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LoanController(),
         ),
       ],
       child: Consumer<ThemeController>(builder: (context, controller, co) {

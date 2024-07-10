@@ -17,6 +17,13 @@ class Apis {
   static String workStatus = "$baseURL/work-statuses";
   static String relationship = "$baseURL/relationships";
   static String emergencyContacts = "$baseURL/emergency-contacts";
-
   static String emergencyNumberTypes = "$baseURL/emergency-numbers";
+  static String userProfile = "$baseURL/personal-information/";
+  // loan endpoints
+  static String loanRequest = "$baseURL/loan-requests";
+  static String loanRepaymentModes = "$baseURL/loan-repayment-modes";
+  static String loanTerm = "$baseURL/loan-terms";
+  static String userLoanRequest = "$baseURL/loan-requests/user/";
+  static String oneTimeRepayment = "$baseURL/single-term-loans";
+  static String installmentRepayment = "$baseURL/loan-installments";
 }

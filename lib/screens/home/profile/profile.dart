@@ -13,8 +13,12 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     AuthenticatedUser().getUser();
     return Scaffold(
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Theme.of(context).scaffoldBackgroundColor
+          : Colors.indigo.shade50,
       appBar: AppBar(
         toolbarHeight: 0,
+        forceMaterialTransparency: true,
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {

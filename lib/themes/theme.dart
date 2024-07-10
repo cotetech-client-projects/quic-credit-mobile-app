@@ -7,7 +7,7 @@ class Themes {
   );
   static Color primaryColor = const Color.fromARGB(255, 8, 73, 212);
   static TextTheme textTheme =
-      GoogleFonts.poppinsTextTheme(); //GoogleFonts.nunitoTextTheme();
+      GoogleFonts.varelaRoundTextTheme(); //GoogleFonts.nunitoTextTheme();
 // light theme
 
   static ThemeData lightTheme = ThemeData(
