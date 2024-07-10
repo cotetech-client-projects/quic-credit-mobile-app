@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quic_credit/exports/exports.dart';
 
 class CouponPage extends StatelessWidget {
   CouponPage({super.key});
@@ -12,15 +13,34 @@ class CouponPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.indigo.shade50,
       appBar: AppBar(
-        title: Text('Available Coupons'),
+        title: const Text('Available Coupons'),
+        forceMaterialTransparency: true,
       ),
-      body: ListView.builder(
-        itemCount: coupons.length,
-        itemBuilder: (context, index) {
-          return CouponCard(coupon: coupons[index]);
-        },
-      ),
+      body: LayoutBuilder(builder: (context, constraints) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+                child: SvgPicture.asset("assets/svgs/no-coupons.svg",
+                    height: 250)),
+            const SizedBox(height: 20),
+            const Text(
+              'No Coupons Available',
+              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: constraints.maxHeight * 0.25),
+          ],
+        );
+      }),
+      //    ListView.builder(
+      //     itemCount: coupons.length,
+      //     itemBuilder: (context, index) {
+      //       return CouponCard(coupon: coupons[index]);
+      //     },
+      //   ),
     );
   }
 }
@@ -36,16 +56,16 @@ class Coupon {
 class CouponCard extends StatelessWidget {
   final Coupon coupon;
 
-  const CouponCard({Key? key, required this.coupon}) : super(key: key);
+  const CouponCard({super.key, required this.coupon});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue.shade100, Colors.blue.shade50],
+            colors: [Colors.blue.shade300, Colors.blue.shade50],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -53,19 +73,19 @@ class CouponCard extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               color: Colors.blue.shade700,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'COUPON',
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     '\$${coupon.value.toStringAsFixed(2)}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -75,18 +95,19 @@ class CouponCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Code: ${coupon.code}',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text('Expires: ${_formatDate(coupon.expiryDate)}'),
-                  SizedBox(height: 15),
-                  ElevatedButton(
+                  const SizedBox(height: 15),
+                  OutlinedButton(
                     onPressed: () {
                       // Implement coupon usage logic here
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -94,8 +115,19 @@ class CouponCard extends StatelessWidget {
                             content: Text('Coupon ${coupon.code} applied!')),
                       );
                     },
-                    child: Text('Use Coupon'),
-                    style: ElevatedButton.styleFrom(),
+                    style: OutlinedButton.styleFrom(
+                      shape: ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      side: const BorderSide(color: Colors.blue, width: 0.5),
+                    ),
+                    child: const Text(
+                      'Use Coupon',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
